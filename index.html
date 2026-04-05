@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -24,13 +24,11 @@
   --t: 0.4s cubic-bezier(.25,.8,.25,1);
   --font-head: 'Bebas Neue', sans-serif;
   --font-body: 'Outfit', sans-serif;
-  /* Spacing scale */
   --sp-xs: clamp(8px, 2vw, 12px);
   --sp-sm: clamp(12px, 3vw, 20px);
   --sp-md: clamp(20px, 4vw, 40px);
   --sp-lg: clamp(40px, 6vw, 80px);
   --sp-xl: clamp(60px, 8vw, 120px);
-  /* Section padding */
   --sec-px: clamp(16px, 5vw, 60px);
   --sec-py: clamp(60px, 8vw, 120px);
 }
@@ -46,9 +44,6 @@ body {
   cursor: none;
 }
 
-/* =============================================
-   CUSTOM CURSOR — desktop only
-   ============================================= */
 .cursor-dot, .cursor-ring {
   position: fixed;
   pointer-events: none;
@@ -71,9 +66,6 @@ body {
   mix-blend-mode: difference;
 }
 
-/* =============================================
-   NOISE OVERLAY
-   ============================================= */
 body::before {
   content: "";
   position: fixed; inset: 0;
@@ -83,9 +75,6 @@ body::before {
   z-index: 9998;
 }
 
-/* =============================================
-   NAVBAR
-   ============================================= */
 .nav {
   position: fixed; top: 0; width: 100%;
   z-index: 1000;
@@ -100,7 +89,6 @@ body::before {
   -webkit-backdrop-filter: blur(30px);
   border-bottom: 1px solid rgba(0,212,255,0.1);
 }
-
 .nav-logo {
   display: flex; align-items: center; gap: 10px;
   font-family: var(--font-head);
@@ -112,7 +100,6 @@ body::before {
   flex-shrink: 0;
 }
 .nav-logo img { height: clamp(30px, 5vw, 40px); filter: drop-shadow(0 0 12px #00d4ff99); }
-
 .nav-links {
   display: flex; gap: clamp(16px, 3vw, 36px); align-items: center;
 }
@@ -135,7 +122,6 @@ body::before {
 }
 .nav-links a:hover { color: var(--ca); }
 .nav-links a:hover::after { width: 100%; }
-
 .nav-cta {
   padding: 8px 20px;
   background: transparent;
@@ -158,8 +144,6 @@ body::before {
 }
 .nav-cta:hover { color: var(--c0) !important; }
 .nav-cta:hover::before { transform: scaleX(1); }
-
-/* Hamburger */
 .nav-menu {
   display: none;
   background: none; border: none; cursor: pointer;
@@ -167,8 +151,6 @@ body::before {
   padding: 6px; z-index: 1002;
   flex-shrink: 0;
 }
-
-/* Mobile nav overlay */
 .nav-mobile {
   display: none;
   position: fixed; inset: 0; top: 0;
@@ -198,16 +180,12 @@ body::before {
   cursor: pointer; padding: 8px;
 }
 
-/* =============================================
-   HERO
-   ============================================= */
 .hero {
   min-height: 100svh;
   position: relative;
   overflow: hidden;
   display: flex; align-items: center;
 }
-
 .hero-bg {
   position: absolute; inset: 0;
   background: radial-gradient(ellipse 80% 60% at 60% 40%, #0a2d5a 0%, var(--c0) 70%);
@@ -228,13 +206,11 @@ body::before {
   bottom: -100px; left: -100px;
   animation: blobFloat 14s ease-in-out infinite reverse;
 }
-
 .particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 .particle {
   position: absolute; background: var(--ca); border-radius: 50%;
   opacity: 0; animation: particleFall linear infinite;
 }
-
 .hero-grid {
   position: absolute; inset: 0;
   background-image:
@@ -242,7 +218,6 @@ body::before {
     linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
   background-size: clamp(40px, 8vw, 80px) clamp(40px, 8vw, 80px);
 }
-
 .hero-inner {
   position: relative; z-index: 2;
   max-width: 1300px; margin: 0 auto;
@@ -251,12 +226,10 @@ body::before {
   width: 100%;
   flex-wrap: wrap;
 }
-
 .hero-text {
   flex: 1;
   min-width: min(300px, 100%);
 }
-
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
   font-size: clamp(10px, 2vw, 12px); letter-spacing: 4px; text-transform: uppercase;
@@ -265,7 +238,6 @@ body::before {
   opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
 }
 .hero-eyebrow span { width: 30px; height: 1px; background: var(--ca); box-shadow: 0 0 8px var(--ca); }
-
 .hero-h1 {
   font-family: var(--font-head);
   font-size: clamp(52px, 12vw, 110px);
@@ -280,7 +252,6 @@ body::before {
   display: block;
   filter: drop-shadow(0 0 20px #00d4ff66);
 }
-
 .hero-p {
   font-size: clamp(14px, 2.5vw, 17px); line-height: 1.8;
   color: rgba(255,255,255,0.6);
@@ -288,12 +259,10 @@ body::before {
   margin: 20px 0 32px;
   opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
 }
-
 .hero-btns {
   display: flex; gap: 12px; flex-wrap: wrap;
   opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
 }
-
 .btn-primary {
   display: inline-flex; align-items: center; gap: 10px;
   padding: clamp(12px, 2vw, 15px) clamp(20px, 3vw, 32px);
@@ -314,7 +283,6 @@ body::before {
 .btn-primary:hover { box-shadow: 0 0 50px #00d4ff66; transform: translateY(-2px); }
 .btn-primary:hover::before { opacity: 1; }
 .btn-primary span { position: relative; z-index: 1; }
-
 .btn-ghost {
   display: inline-flex; align-items: center; gap: 10px;
   padding: clamp(12px, 2vw, 15px) clamp(20px, 3vw, 32px);
@@ -326,7 +294,6 @@ body::before {
 }
 .btn-ghost:hover { border-color: var(--ca); color: var(--ca); background: rgba(0,212,255,0.05); }
 
-/* Hero Visual */
 .hero-visual {
   flex: 1;
   display: flex; justify-content: center; align-items: center;
@@ -334,25 +301,20 @@ body::before {
   min-width: min(260px, 100%);
   opacity: 0; animation: fadeIn 1.2s 0.8s forwards;
 }
-
 .bottle-3d-wrap {
   position: relative;
   width: clamp(200px, 40vw, 320px);
   height: clamp(340px, 60vw, 520px);
 }
-
 .bottle-scene {
   position: relative; width: 100%; height: 100%;
   display: flex; align-items: center; justify-content: center;
-}
-
-.bottle-svg {
-  width: clamp(140px, 28vw, 200px);
+}.bottle-svg {
+  width: clamp(200px, 38vw, 340px);
   height: auto;
-  filter: drop-shadow(0 30px 80px #00d4ff55) drop-shadow(0 0 40px #0077ff33);
+  filter: drop-shadow(0 30px 80px #00d4ff88) drop-shadow(0 0 60px #0077ff55);
   animation: bottleFloat 5s ease-in-out infinite;
 }
-
 .bottle-ring {
   position: absolute; bottom: -30px; left: 50%;
   transform: translateX(-50%);
@@ -361,7 +323,6 @@ body::before {
   border-radius: 50%; filter: blur(8px);
   animation: bottleFloat 5s ease-in-out infinite;
 }
-
 .orbit {
   position: absolute; inset: -50px;
   border-radius: 50%; border: 1px dashed rgba(0,212,255,0.12);
@@ -375,7 +336,6 @@ body::before {
 }
 .orbit-2 { inset: -100px; animation-duration: 14s; animation-direction: reverse; border-color: rgba(0,119,255,0.08); }
 .orbit-2::before { background: var(--cb); box-shadow: 0 0 12px var(--cb); }
-
 .hero-stats {
   position: absolute; right: -10px; top: 50%;
   transform: translateY(-50%);
@@ -393,7 +353,6 @@ body::before {
 .stat-badge::before { content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--cg); }
 .stat-num { font-family: var(--font-head); font-size: clamp(20px, 4vw, 28px); background: var(--cg); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .stat-label { font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; }
-
 .scroll-hint {
   position: absolute; bottom: 24px; left: var(--sec-px);
   display: flex; align-items: center; gap: 14px;
@@ -411,30 +370,23 @@ body::before {
   animation: scanLine 2s ease-in-out infinite;
 }
 
-/* =============================================
-   SECTION BASE
-   ============================================= */
 section { padding: var(--sec-py) var(--sec-px); }
 .container { max-width: 1300px; margin: 0 auto; }
-
 .s-label {
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--ca); margin-bottom: 16px;
 }
 .s-label::before { content: ""; width: 24px; height: 1px; background: var(--ca); box-shadow: 0 0 8px var(--ca); }
-
 .s-title {
   font-family: var(--font-head);
   font-size: clamp(36px, 7vw, 72px);
   line-height: 1; letter-spacing: 2px;
 }
 .s-title em { font-style: normal; background: var(--cg); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
 .s-sub {
   font-size: clamp(14px, 2.5vw, 16px); color: rgba(255,255,255,0.5); line-height: 1.7;
   max-width: 500px; margin-top: 14px;
 }
-
 .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s ease, transform 0.9s ease; }
 .reveal.vis { opacity: 1; transform: none; }
 .reveal-d1 { transition-delay: 0.1s; }
@@ -442,9 +394,6 @@ section { padding: var(--sec-py) var(--sec-px); }
 .reveal-d3 { transition-delay: 0.3s; }
 .reveal-d4 { transition-delay: 0.4s; }
 
-/* =============================================
-   MARQUEE
-   ============================================= */
 .marquee-wrap {
   padding: 18px 0;
   background: rgba(0,212,255,0.04);
@@ -460,11 +409,7 @@ section { padding: var(--sec-py) var(--sec-px); }
 }
 .marquee-item i { color: var(--ca); font-size: 12px; }
 
-/* =============================================
-   SERVICES
-   ============================================= */
 .services-section { background: linear-gradient(180deg, var(--c0) 0%, var(--c1) 100%); }
-
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
@@ -473,7 +418,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   border: 1px solid rgba(0,212,255,0.08);
   border-radius: 2px; overflow: hidden;
 }
-
 .svc-card {
   background: rgba(4,21,48,0.6);
   padding: clamp(28px, 5vw, 50px) clamp(20px, 4vw, 40px);
@@ -495,14 +439,12 @@ section { padding: var(--sec-py) var(--sec-px); }
   box-shadow: var(--neon);
 }
 .svc-card:hover::after { width: 100%; }
-
 .svc-num {
   font-family: var(--font-head); font-size: clamp(48px, 8vw, 72px);
   color: rgba(0,212,255,0.07); line-height: 1;
   position: absolute; top: 16px; right: 24px; transition: color 0.5s;
 }
 .svc-card:hover .svc-num { color: rgba(0,212,255,0.12); }
-
 .svc-icon {
   width: 52px; height: 52px;
   background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.2);
@@ -510,10 +452,8 @@ section { padding: var(--sec-py) var(--sec-px); }
   font-size: 22px; margin-bottom: 24px; transition: all 0.5s; position: relative;
 }
 .svc-card:hover .svc-icon { background: rgba(0,212,255,0.15); border-color: var(--ca); box-shadow: 0 0 20px rgba(0,212,255,0.3); }
-
 .svc-title { font-family: var(--font-head); font-size: clamp(22px, 4vw, 28px); letter-spacing: 1px; margin-bottom: 12px; }
 .svc-desc { font-size: clamp(13px, 2vw, 14px); color: rgba(255,255,255,0.55); line-height: 1.8; margin-bottom: 24px; }
-
 .svc-features { list-style: none; margin-bottom: 32px; }
 .svc-features li {
   font-size: clamp(12px, 2vw, 13px); color: rgba(255,255,255,0.7);
@@ -525,17 +465,29 @@ section { padding: var(--sec-py) var(--sec-px); }
   background: var(--ca); border-radius: 50%; flex-shrink: 0;
   box-shadow: 0 0 6px var(--ca);
 }
-
 .svc-btn {
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
   color: var(--ca); text-decoration: none;
   background: none; border: none; cursor: pointer; font-family: var(--font-body);
   transition: gap 0.3s;
+pointer-events: all !important;
+  cursor: pointer !important;
+  position: relative;
+  z-index: 10;
+
 }
+
+ 
+
+
+
+
+
+
+
 .svc-btn:hover { gap: 16px; }
 .svc-btn i { font-size: 11px; }
-
 .badge-featured {
   position: absolute; top: 20px; right: 20px;
   font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
@@ -544,21 +496,15 @@ section { padding: var(--sec-py) var(--sec-px); }
   padding: 4px 12px; border-radius: 2px;
 }
 
-/* =============================================
-   WHY US
-   ============================================= */
 .why-section { background: var(--c1); position: relative; overflow: hidden; }
 .why-section::before {
   content: ""; position: absolute; inset: 0;
   background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(0,119,255,0.06) 0%, transparent 70%);
 }
-
 .why-layout { display: flex; align-items: center; gap: clamp(40px, 8vw, 100px); flex-wrap: wrap; }
 .why-left { flex: 1; min-width: min(280px, 100%); }
 .why-right { flex: 1; min-width: min(280px, 100%); }
-
 .why-list { display: flex; flex-direction: column; gap: 2px; margin-top: clamp(30px, 5vw, 50px); }
-
 .why-item {
   display: flex; align-items: flex-start; gap: 20px;
   padding: clamp(18px, 3vw, 28px) clamp(16px, 3vw, 32px);
@@ -572,11 +518,9 @@ section { padding: var(--sec-py) var(--sec-px); }
   width: 3px; height: 0; background: var(--cg); transition: height 0.4s; box-shadow: var(--neon);
 }
 .why-item:hover::before, .why-item.active::before { height: 100%; }
-
 .why-icon { width: 40px; height: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--ca); }
 .why-text h4 { font-size: clamp(14px, 2.5vw, 17px); font-weight: 600; margin-bottom: 5px; }
 .why-text p { font-size: clamp(12px, 2vw, 13px); color: rgba(255,255,255,0.5); line-height: 1.7; }
-
 .why-visual {
   position: relative; height: clamp(280px, 50vw, 500px); width: 100%;
   display: flex; align-items: center; justify-content: center;
@@ -602,7 +546,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   line-height: 1; filter: drop-shadow(0 0 30px #00d4ff55);
 }
 .why-center p { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 2px; text-transform: uppercase; }
-
 .float-badge {
   position: absolute;
   background: rgba(4,21,48,0.9); border: 1px solid rgba(0,212,255,0.2);
@@ -616,9 +559,6 @@ section { padding: var(--sec-py) var(--sec-px); }
 .fb3 { bottom: clamp(10px, 3vw, 40px); left: -10px; }
 .fb4 { bottom: clamp(10px, 3vw, 40px); right: -10px; }
 
-/* =============================================
-   EVENTS
-   ============================================= */
 .events-section { background: var(--c0); }
 .events-grid {
   display: grid;
@@ -646,9 +586,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   padding: 4px 10px; border-radius: 2px; margin-bottom: 10px;
 }
 
-/* =============================================
-   OFFER
-   ============================================= */
 .offer-section {
   padding: 0;
   background: linear-gradient(135deg, #041530 0%, #072654 50%, #041530 100%);
@@ -678,7 +615,6 @@ section { padding: var(--sec-py) var(--sec-px); }
 }
 .offer-left h2 span { background: linear-gradient(135deg,#00ffcc,#00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .offer-left p { font-size: clamp(14px, 2.5vw, 16px); color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 28px; }
-
 .offer-pill {
   display: inline-flex; align-items: center; gap: 12px;
   background: rgba(255,255,255,0.04); border: 1px solid rgba(0,255,204,0.2);
@@ -690,7 +626,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   background: linear-gradient(135deg,#00ffcc,#00d4ff); color: var(--c0);
   padding: 7px 16px; border-radius: 100px; font-size: 13px; font-weight: 700;
 }
-
 .offer-right {
   flex: 1; min-width: min(240px, 100%);
   display: flex; justify-content: center; align-items: center;
@@ -713,9 +648,6 @@ section { padding: var(--sec-py) var(--sec-px); }
 .db1 { top: 16px; right: 0; transform: rotate(8deg); }
 .db2 { bottom: 16px; left: 0; transform: rotate(-6deg); }
 
-/* =============================================
-   TESTIMONIALS
-   ============================================= */
 .testi-section { background: var(--c1); position: relative; overflow: hidden; }
 .testi-section::before {
   content: ""; position: absolute; inset: 0;
@@ -748,9 +680,6 @@ section { padding: var(--sec-py) var(--sec-px); }
 .testi-name { font-size: 15px; font-weight: 600; }
 .testi-role { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 1px; }
 
-/* =============================================
-   GALLERY
-   ============================================= */
 .gallery-section {
   background: var(--c0);
   padding: var(--sec-py) var(--sec-px);
@@ -837,7 +766,6 @@ section { padding: var(--sec-py) var(--sec-px); }
 .g-badge.hot { background: rgba(0,212,255,0.18); border-color: var(--ca); color: var(--ca); }
 .g-item.hidden { opacity: 0; pointer-events: none; transform: scale(0.95); position: absolute; visibility: hidden; }
 
-/* LIGHTBOX */
 .lightbox {
   display: none; position: fixed; inset: 0; z-index: 99990;
   background: rgba(2,13,31,0.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
@@ -870,9 +798,6 @@ section { padding: var(--sec-py) var(--sec-px); }
 .lb-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,212,255,0.25); cursor: pointer; transition: all 0.3s; border: none; }
 .lb-dot.active { background: var(--ca); box-shadow: 0 0 8px var(--ca); transform: scale(1.3); }
 
-/* =============================================
-   CONTACT
-   ============================================= */
 .contact-section { background: var(--c0); position: relative; overflow: hidden; }
 .contact-section::before {
   content: ""; position: absolute; inset: 0;
@@ -899,7 +824,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   color: rgba(255,255,255,0.6); font-size: 16px; text-decoration: none; transition: all 0.3s;
 }
 .c-soc-btn:hover { background: rgba(0,212,255,0.1); border-color: var(--ca); color: var(--ca); box-shadow: 0 0 20px rgba(0,212,255,0.2); }
-
 .c-form { display: flex; flex-direction: column; gap: 14px; }
 .c-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .c-field { display: flex; flex-direction: column; gap: 7px; }
@@ -935,9 +859,6 @@ section { padding: var(--sec-py) var(--sec-px); }
 .c-submit span, .c-submit i { position: relative; z-index: 1; }
 .c-submit.sent { background: linear-gradient(135deg,#00c853,#69f0ae); box-shadow: 0 0 30px rgba(0,200,83,0.3); }
 
-/* =============================================
-   FOOTER
-   ============================================= */
 .footer {
   background: #020a18; border-top: 1px solid rgba(0,212,255,0.08);
   padding: clamp(50px, 8vw, 80px) var(--sec-px) clamp(20px, 4vw, 32px);
@@ -981,9 +902,6 @@ section { padding: var(--sec-py) var(--sec-px); }
 }
 .footer-bottom span { color: var(--ca); }
 
-/* =============================================
-   WHATSAPP FLOAT
-   ============================================= */
 .wa-btn {
   position: fixed; bottom: clamp(20px, 4vw, 32px); right: clamp(20px, 4vw, 32px);
   width: clamp(52px, 8vw, 64px); height: clamp(52px, 8vw, 64px);
@@ -998,9 +916,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   background: #25D366; opacity: 0.5; animation: waPulse 2s ease-out infinite;
 }
 
-/* =============================================
-   KEYFRAMES
-   ============================================= */
 @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes blobFloat { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.05); } }
@@ -1013,47 +928,22 @@ section { padding: var(--sec-py) var(--sec-px); }
 @keyframes particleFall { 0% { transform:translateY(-20px) scale(0); opacity:0; } 10% { opacity:1; } 90% { opacity:0.3; } 100% { transform:translateY(100vh) scale(0.3); opacity:0; } }
 @keyframes lbIn { from { opacity:0; transform:scale(0.94) translateY(10px); } to { opacity:1; transform:scale(1) translateY(0); } }
 
-/* =============================================
-   RESPONSIVE: TABLET (≤ 1024px)
-   ============================================= */
 @media (max-width: 1024px) {
   .footer-grid { grid-template-columns: 1fr 1fr; }
-  .events-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
-  }
-  .ev-card.tall {
-    grid-column: 1 / span 2;
-    grid-row: auto;
-    min-height: clamp(280px, 40vw, 360px);
-    height: auto;
-  }
+  .events-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto; }
+  .ev-card.tall { grid-column: 1 / span 2; grid-row: auto; min-height: clamp(280px, 40vw, 360px); height: auto; }
   .hero-stats { right: -5px; }
   .orbit { inset: -30px; }
   .orbit-2 { inset: -70px; }
 }
-
-/* =============================================
-   RESPONSIVE: MOBILE (≤ 768px)
-   ============================================= */
 @media (max-width: 768px) {
   body { cursor: auto; }
   .cursor-dot, .cursor-ring { display: none; }
-
-  /* Nav */
   .nav-links { display: none; }
   .nav-menu { display: block; }
   .nav { padding: 14px var(--sec-px); }
   .nav.scrolled { padding: 10px var(--sec-px); }
-
-  /* Hero */
-  .hero-inner {
-    flex-direction: column;
-    padding-top: 90px;
-    padding-bottom: 40px;
-    text-align: center;
-    gap: 30px;
-  }
+  .hero-inner { flex-direction: column; padding-top: 90px; padding-bottom: 40px; text-align: center; gap: 30px; }
   .hero-text { min-width: 100%; }
   .hero-p { margin-left: auto; margin-right: auto; }
   .hero-btns { justify-content: center; }
@@ -1064,51 +954,31 @@ section { padding: var(--sec-py) var(--sec-px); }
   .orbit-2 { inset: -50px; }
   .scroll-hint { bottom: 16px; font-size: 9px; }
   .bottle-3d-wrap { width: clamp(180px, 50vw, 240px); height: clamp(300px, 65vw, 380px); }
-
-  /* Services */
   .services-grid { grid-template-columns: 1fr; }
-
-  /* Why */
   .why-layout { flex-direction: column; gap: 40px; }
   .why-right { width: 100%; order: -1; }
   .why-visual { height: clamp(260px, 70vw, 340px); }
   .fb1, .fb3 { left: 0; }
   .fb2, .fb4 { right: 0; }
-
-  /* Events */
   .events-grid { grid-template-columns: 1fr; }
   .ev-card { height: clamp(200px, 50vw, 260px); }
   .ev-card.tall { grid-column: auto; grid-row: auto; min-height: clamp(240px, 55vw, 300px); }
-
-  /* Testimonials */
   .testi-grid { grid-template-columns: 1fr; }
-
-  /* Gallery */
   .gallery-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
   .g-item { aspect-ratio: 2/3; }
   .lb-prev { left: 4px; }
   .lb-next { right: 4px; }
   .lb-inner { max-width: 96vw; }
-
-  /* Contact */
   .contact-layout { flex-direction: column; }
   .c-row { grid-template-columns: 1fr; }
-
-  /* Footer */
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .footer-bottom { flex-direction: column; text-align: center; }
-
-  /* Offer */
   .offer-inner { flex-direction: column; text-align: center; }
   .offer-left { min-width: 100%; }
   .offer-tag { justify-content: center; }
   .offer-pill { justify-content: center; }
   .offer-left p { margin-left: auto; margin-right: auto; }
 }
-
-/* =============================================
-   RESPONSIVE: SMALL MOBILE (≤ 480px)
-   ============================================= */
 @media (max-width: 480px) {
   .gallery-grid { grid-template-columns: 1fr 1fr; }
   .gallery-filters { gap: 6px; }
@@ -1122,10 +992,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   .float-badge { font-size: 9px; padding: 8px 10px; }
   .float-badge strong { font-size: 14px; }
 }
-
-/* =============================================
-   RESPONSIVE: XS MOBILE (≤ 360px)
-   ============================================= */
 @media (max-width: 360px) {
   .hero-h1 { font-size: 40px; }
   .s-title { font-size: 32px; }
@@ -1133,16 +999,10 @@ section { padding: var(--sec-py) var(--sec-px); }
   .g-item { aspect-ratio: 4/5; }
   .nav-logo { font-size: 18px; }
 }
-
-/* =============================================
-   SAFE AREA (iPhone notch, etc.)
-   ============================================= */
 @supports (padding: env(safe-area-inset-bottom)) {
   .wa-btn { bottom: calc(clamp(20px, 4vw, 32px) + env(safe-area-inset-bottom)); }
   .footer { padding-bottom: calc(clamp(20px, 4vw, 32px) + env(safe-area-inset-bottom)); }
 }
-
-/* Touch-friendly tap targets */
 @media (hover: none) {
   .g-overlay { opacity: 1; background: linear-gradient(0deg, rgba(2,13,31,0.85) 0%, transparent 60%); }
   .g-tag, .g-title, .g-action { transform: none !important; opacity: 1; }
@@ -1154,14 +1014,10 @@ section { padding: var(--sec-py) var(--sec-px); }
 </head>
 <body>
 
-<!-- CUSTOM CURSOR -->
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
-
-<!-- PARTICLES -->
 <div class="particles" id="particles"></div>
 
-<!-- ===================== NAVBAR ===================== -->
 <nav class="nav" id="navbar">
   <a href="#" class="nav-logo">
     <img src="assets/logo.png" alt="Hydraa Drop" onerror="this.style.display='none'">
@@ -1178,7 +1034,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   <button class="nav-menu" id="navMenuBtn" aria-label="Open menu"><i class="fa fa-bars"></i></button>
 </nav>
 
-<!-- Mobile Nav Overlay -->
 <div class="nav-mobile" id="navMobile">
   <button class="nav-mobile-close" id="navMobileClose" aria-label="Close menu"><i class="fa fa-times"></i></button>
   <a href="#" onclick="closeNav()">Home</a>
@@ -1189,7 +1044,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   <a href="#contact" class="cta" onclick="closeNav()">Order Now</a>
 </div>
 
-<!-- ===================== HERO ===================== -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
@@ -1207,37 +1061,7 @@ section { padding: var(--sec-py) var(--sec-px); }
       <div class="orbit"></div>
       <div class="orbit orbit-2"></div>
       <div class="bottle-scene">
-        <svg class="bottle-svg" viewBox="0 0 200 450" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00d4ff" stop-opacity="0.9"/><stop offset="100%" stop-color="#0077ff" stop-opacity="0.7"/></linearGradient>
-            <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="white" stop-opacity="0.25"/><stop offset="50%" stop-color="white" stop-opacity="0.05"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient>
-            <linearGradient id="bg3" x1="1" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00d4ff" stop-opacity="0.15"/><stop offset="100%" stop-color="#041530" stop-opacity="0.9"/></linearGradient>
-            <filter id="glow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-            <clipPath id="bodyClip"><path d="M60 90 Q55 100 50 120 L40 380 Q40 400 100 400 Q160 400 160 380 L150 120 Q145 100 140 90 Z"/></clipPath>
-          </defs>
-          <rect x="75" y="30" width="50" height="16" rx="5" fill="url(#bg1)" filter="url(#glow)"/>
-          <rect x="78" y="38" width="44" height="8" rx="2" fill="rgba(0,212,255,0.4)"/>
-          <path d="M78 46 Q76 60 72 80 L128 80 Q124 60 122 46 Z" fill="url(#bg1)"/>
-          <path d="M60 80 Q55 90 50 110 L150 110 Q145 90 140 80 Z" fill="url(#bg1)" opacity="0.85"/>
-          <path d="M50 110 L40 380 Q40 400 100 400 Q160 400 160 380 L150 110 Z" fill="url(#bg3)"/>
-          <rect x="40" y="210" width="120" height="190" rx="0" fill="url(#bg1)" opacity="0.4" clip-path="url(#bodyClip)"/>
-          <path d="M40 210 Q70 200 100 210 Q130 220 160 210 L160 230 Q130 240 100 230 Q70 220 40 230 Z" fill="url(#bg1)" opacity="0.6"/>
-          <path d="M58 115 Q56 150 55 200 L68 200 Q68 150 70 115 Z" fill="url(#bg2)" rx="4"/>
-          <path d="M50 160 L150 160" stroke="rgba(0,212,255,0.15)" stroke-width="0.5"/>
-          <path d="M45 240 L155 240" stroke="rgba(0,212,255,0.1)" stroke-width="0.5"/>
-          <path d="M42 320 L158 320" stroke="rgba(0,212,255,0.08)" stroke-width="0.5"/>
-          <rect x="48" y="165" width="104" height="70" rx="3" fill="rgba(4,21,48,0.6)" stroke="rgba(0,212,255,0.2)" stroke-width="0.5"/>
-          <text x="100" y="192" text-anchor="middle" fill="rgba(0,212,255,0.9)" font-family="Bebas Neue, sans-serif" font-size="14" letter-spacing="2">HYDRAA DROP</text>
-          <text x="100" y="210" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Outfit, sans-serif" font-size="8" letter-spacing="3">PURE DRINKING WATER</text>
-          <line x1="60" y1="220" x2="140" y2="220" stroke="rgba(0,212,255,0.3)" stroke-width="0.5"/>
-          <text x="100" y="230" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-family="Outfit, sans-serif" font-size="7" letter-spacing="2">1 LITRE — ISI CERTIFIED</text>
-          <path d="M40 380 Q40 400 100 400 Q160 400 160 380 L158 382 Q158 398 100 398 Q42 398 42 382 Z" fill="rgba(0,212,255,0.2)"/>
-          <circle cx="70" cy="280" r="3" fill="rgba(0,212,255,0.5)" opacity="0.5"/>
-          <circle cx="115" cy="310" r="2" fill="rgba(0,212,255,0.4)" opacity="0.4"/>
-          <circle cx="88" cy="350" r="2.5" fill="rgba(0,212,255,0.4)" opacity="0.3"/>
-          <circle cx="130" cy="270" r="1.5" fill="rgba(0,212,255,0.6)" opacity="0.5"/>
-        </svg>
-        <div class="bottle-ring"></div>
+       <img class="bottle-svg" src="assets/bottle_transparent.png" alt="Hydraa Drop Water Bottle">
       </div>
       <div class="hero-stats">
         <div class="stat-badge"><div class="stat-num">500+</div><div class="stat-label">Happy Clients</div></div>
@@ -1249,7 +1073,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   <div class="scroll-hint"><div class="scroll-line"></div>SCROLL DOWN</div>
 </section>
 
-<!-- ===================== MARQUEE ===================== -->
 <div class="marquee-wrap">
   <div class="marquee-track">
     <span class="marquee-item"><i class="fa fa-droplet"></i> BULK WATER SUPPLY</span>
@@ -1267,7 +1090,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   </div>
 </div>
 
-<!-- ===================== SERVICES ===================== -->
 <section class="services-section" id="services">
   <div class="container">
     <div class="reveal">
@@ -1287,7 +1109,7 @@ section { padding: var(--sec-py) var(--sec-px); }
           <li>Consistent quality standards</li>
           <li>Industrial &amp; commercial scale</li>
         </ul>
-        <button class="svc-btn" onclick="sendWA('Bulk Water Supply')">Get Supply <i class="fa fa-arrow-right"></i></button>
+        <a href="https://wa.me/916261949470?text=Hi%20Hydraa%20Drop%2C%20I%20am%20interested%20in%20Bulk%20Water%20Supply.%20Please%20share%20details." target="_blank" class="svc-btn">Get Supply <i class="fa fa-arrow-right"></i></a>
       </div>
       <div class="svc-card featured">
         <div class="badge-featured">Most Popular</div>
@@ -1301,7 +1123,7 @@ section { padding: var(--sec-py) var(--sec-px); }
           <li>Premium packaging</li>
           <li>Minimum 200 bottles</li>
         </ul>
-        <button class="svc-btn" onclick="sendWA('Customized Bottles')">Customize Now <i class="fa fa-arrow-right"></i></button>
+        <a href="https://wa.me/916261949470?text=Hi%20Hydraa%20Drop%2C%20I%20am%20interested%20in%20Customized%20Bottles.%20Please%20share%20details." target="_blank" class="svc-btn">Customize Now <i class="fa fa-arrow-right"></i></a>
       </div>
       <div class="svc-card">
         <div class="svc-num">03</div>
@@ -1314,13 +1136,12 @@ section { padding: var(--sec-py) var(--sec-px); }
           <li>Consistent stock levels</li>
           <li>Competitive margins</li>
         </ul>
-        <button class="svc-btn" onclick="sendWA('Retail Distribution')">Partner With Us <i class="fa fa-arrow-right"></i></button>
+       <a href="https://wa.me/916261949470?text=Hi%20Hydraa%20Drop%2C%20I%20am%20interested%20in%20Retail%20Distribution.%20Please%20share%20details." target="_blank" class="svc-btn">Partner With Us <i class="fa fa-arrow-right"></i></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== WHY US ===================== -->
 <section class="why-section">
   <div class="container">
     <div class="why-layout">
@@ -1367,7 +1188,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   </div>
 </section>
 
-<!-- ===================== EVENTS ===================== -->
 <section class="events-section" id="events">
   <div class="container">
     <div class="reveal">
@@ -1427,19 +1247,18 @@ section { padding: var(--sec-py) var(--sec-px); }
   </div>
 </section>
 
-<!-- ===================== OFFER ===================== -->
 <section class="offer-section" id="offer">
   <div class="offer-inner">
     <div class="offer-left reveal">
       <div class="offer-tag">Limited Time Offer</div>
       <h2>BULK ORDER <span>BONUS</span></h2>
-      <p>Order <strong>1000+ bottles</strong> and unlock an exclusive deal that saves you thousands — plus a FREE premium water dispenser.</p>
+      <p>Order <strong>1000+ units</strong> and unlock an exclusive deal that saves you thousands — plus a FREE premium water dispenser.</p>
       <div class="offer-pill">
         <span class="offer-pill-text">Order 1000+ Bottles</span>
         <span class="offer-pill-badge">FREE Dispenser</span>
       </div>
       <br>
-      <a href="https://wa.me/916266339177?text=Hi%20I%20want%201000%20bottle%20offer" target="_blank" class="btn-primary">
+      <a href="https://wa.me/916261949470?text=Hi%20I%20want%201000%20bottle%20offer" target="_blank" class="btn-primary">
         <span>Claim This Offer</span>
         <i class="fa fa-gift"></i>
       </a>
@@ -1456,7 +1275,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   </div>
 </section>
 
-<!-- ===================== TESTIMONIALS ===================== -->
 <section class="testi-section">
   <div class="container">
     <div class="reveal" style="text-align:center">
@@ -1493,7 +1311,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   </div>
 </section>
 
-<!-- ===================== GALLERY ===================== -->
 <section class="gallery-section" id="gallery">
   <div class="container">
     <div class="gallery-header reveal">
@@ -1565,7 +1382,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   </div>
 </section>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
   <div class="lb-inner" id="lbInner">
     <button class="lb-close" onclick="closeLightbox()"><i class="fa fa-times"></i></button>
@@ -1579,7 +1395,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   </div>
 </div>
 
-<!-- ===================== CONTACT ===================== -->
 <section class="contact-section" id="contact">
   <div class="container">
     <div class="reveal" style="text-align:center">
@@ -1650,7 +1465,6 @@ section { padding: var(--sec-py) var(--sec-px); }
   </div>
 </section>
 
-<!-- ===================== FOOTER ===================== -->
 <footer class="footer">
   <div class="footer-grid">
     <div>
@@ -1658,6 +1472,15 @@ section { padding: var(--sec-py) var(--sec-px); }
         <img src="./assets/logo.png" alt="Logo" onerror="this.style.display='none'">
         HYDRAA DROP
       </div>
+
+
+
+
+
+
+
+
+
       <p class="footer-desc">Premium packaged drinking water delivering purity, quality and trust for every occasion — from bulk supply to luxury custom-branded bottles.</p>
       <div class="footer-socials">
         <a href="https://www.instagram.com/hydraa.drop" target="_blank" class="footer-soc"><i class="fab fa-instagram"></i></a>
@@ -1695,19 +1518,40 @@ section { padding: var(--sec-py) var(--sec-px); }
       </ul>
     </div>
   </div>
+
+
+
+
+
+
+ <div style="max-width:1300px;margin:0 auto 40px;padding:0 clamp(16px,5vw,60px);">
+    <div style="border:1px solid rgba(0,212,255,0.15);border-radius:8px;overflow:hidden;position:relative;">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(135deg,#00d4ff,#0077ff);z-index:1;"></div>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235013.56578768065!2d75.7332!3d22.7196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fcad1b410ddb%3A0x96ec4da356240f4!2sIndore%2C%20Madhya%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000"
+        width="100%"
+        height="300"
+        style="display:block;border:none;filter:invert(90%) hue-rotate(180deg) brightness(0.85) contrast(1.1);"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Hydraa Drop Location - Indore, MP">
+      </iframe>
+    </div>
+  </div>
+
+
   <div class="footer-bottom">
     <p>© 2026 <span>Hydraa Drop</span>. All rights reserved.</p>
     <p>Crafted with 💧 for purity &amp; excellence</p>
   </div>
 </footer>
 
-<!-- WHATSAPP FLOAT -->
 <a href="https://wa.me/916261949470?text=Hi%20Hydraa%20Drop%2C%20I%20want%20to%20order%20water" target="_blank" class="wa-btn">
   <i class="fab fa-whatsapp"></i>
 </a>
 
 <script>
-/* ============ CUSTOM CURSOR ============ */
 const isMobile = window.matchMedia('(hover: none)').matches;
 if (!isMobile) {
   const dot = document.getElementById('cursorDot');
@@ -1720,7 +1564,6 @@ if (!isMobile) {
   (function animRing(){ rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
 }
 
-/* ============ PARTICLES ============ */
 const pc = document.getElementById('particles');
 const count = isMobile ? 20 : 40;
 for(let i=0;i<count;i++){
@@ -1731,14 +1574,12 @@ for(let i=0;i<count;i++){
   pc.appendChild(p);
 }
 
-/* ============ NAVBAR SCROLL ============ */
 const nav = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
   revealElements();
 }, {passive:true});
 
-/* ============ MOBILE NAV ============ */
 function openNav() {
   document.getElementById('navMobile').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1753,12 +1594,10 @@ document.getElementById('navMenuBtn').addEventListener('click', () => {
   document.getElementById('navMobile').classList.contains('open') ? closeNav() : openNav();
 });
 document.getElementById('navMobileClose').addEventListener('click', closeNav);
-// Close on outside tap
 document.getElementById('navMobile').addEventListener('click', e => {
   if (e.target === document.getElementById('navMobile')) closeNav();
 });
 
-/* ============ SCROLL REVEAL ============ */
 function revealElements(){
   document.querySelectorAll('.reveal:not(.vis)').forEach((el,i)=>{
     const rect = el.getBoundingClientRect();
@@ -1768,23 +1607,20 @@ function revealElements(){
 window.addEventListener('load', revealElements);
 document.addEventListener('scroll', revealElements, {passive:true});
 
-/* ============ WHY ITEMS ============ */
 document.querySelectorAll('.why-item').forEach(item=>{
   item.addEventListener('mouseenter',()=>{
     document.querySelectorAll('.why-item').forEach(i=>i.classList.remove('active'));
     item.classList.add('active');
   });
-  // Touch support
   item.addEventListener('touchstart',()=>{
     document.querySelectorAll('.why-item').forEach(i=>i.classList.remove('active'));
     item.classList.add('active');
   },{passive:true});
 });
 
-/* ============ WHATSAPP ============ */
 function sendWA(service){
   const msg = `Hi Hydraa Drop,\n\nI am interested in ${service}.\nPlease share details.\n\nThank you.`;
-  window.open('https://wa.me/916266339177?text='+encodeURIComponent(msg),'_blank');
+  window.open('https://wa.me/916261949470?text='+encodeURIComponent(msg),'_blank');
 }
 
 function handleSubmit(e){
@@ -1803,14 +1639,9 @@ function handleSubmit(e){
   setTimeout(()=>{ btn.classList.remove('sent'); btn.innerHTML = '<span>Send via WhatsApp</span> <i class="fab fa-whatsapp"></i>'; }, 4000);
 }
 
-/* ============ GALLERY FILTER ============ */
 const galleryImages = [
-  'assets/photoad5.png',
-  'assets/photoad6.png',
-  'assets/photoad3.png',
-  'assets/photoad1.png',
-  'assets/photoad2.png',
-  'assets/photoad7.png',
+  'assets/photoad5.png','assets/photoad6.png','assets/photoad3.png',
+  'assets/photoad1.png','assets/photoad2.png','assets/photoad7.png',
 ];
 
 document.querySelectorAll('.g-filter').forEach(btn => {
@@ -1836,9 +1667,7 @@ document.querySelectorAll('.g-filter').forEach(btn => {
   });
 });
 
-/* ============ LIGHTBOX ============ */
 let lbCurrent = 0;
-
 function buildDots() {
   const dots = document.getElementById('lbDots');
   dots.innerHTML = '';
@@ -1850,7 +1679,6 @@ function buildDots() {
     dots.appendChild(d);
   });
 }
-
 function setLb(idx) {
   lbCurrent = (idx + galleryImages.length) % galleryImages.length;
   const img = document.getElementById('lbImg');
@@ -1865,32 +1693,25 @@ function setLb(idx) {
   document.getElementById('lbCounter').textContent = (lbCurrent + 1) + ' / ' + galleryImages.length;
   buildDots();
 }
-
 function openLightbox(idx) {
   setLb(idx);
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
   document.body.style.overflow = '';
 }
-
 function closeLightboxBg(e) {
   if(e.target === document.getElementById('lightbox')) closeLightbox();
 }
-
 function lbNav(dir) { setLb(lbCurrent + dir); }
-
 document.addEventListener('keydown', e => {
   if(!document.getElementById('lightbox').classList.contains('open')) return;
   if(e.key === 'ArrowRight') lbNav(1);
   if(e.key === 'ArrowLeft') lbNav(-1);
   if(e.key === 'Escape') closeLightbox();
 });
-
-/* Touch swipe for lightbox */
 let lbTouchX = null;
 document.getElementById('lightbox').addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; },{passive:true});
 document.getElementById('lightbox').addEventListener('touchend', e => {
@@ -1899,7 +1720,6 @@ document.getElementById('lightbox').addEventListener('touchend', e => {
   if(Math.abs(dx) > 40) lbNav(dx < 0 ? 1 : -1);
   lbTouchX = null;
 },{passive:true});
-
 buildDots();
 </script>
 </body>
