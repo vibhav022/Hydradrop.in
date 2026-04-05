@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Hydraa Drop — Pure Water. Premium Experience.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+
+/* =============================================
+   DESIGN TOKENS
+   ============================================= */
+:root {
+  --c0: #020d1f;
+  --c1: #041530;
+  --c2: #072654;
+  --cw: #ffffff;
+  --ca: #00d4ff;
+  --cb: #0077ff;
+  --cc: #00ffcc;
+  --cg: linear-gradient(135deg,#00d4ff,#0077ff);
+  --neon: 0 0 20px #00d4ff88, 0 0 60px #0077ff44;
+  --t: 0.4s cubic-bezier(.25,.8,.25,1);
+  --font-head: 'Bebas Neue', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  /* Spacing scale */
+  --sp-xs: clamp(8px, 2vw, 12px);
+  --sp-sm: clamp(12px, 3vw, 20px);
+  --sp-md: clamp(20px, 4vw, 40px);
+  --sp-lg: clamp(40px, 6vw, 80px);
+  --sp-xl: clamp(60px, 8vw, 120px);
+  /* Section padding */
+  --sec-px: clamp(16px, 5vw, 60px);
+  --sec-py: clamp(60px, 8vw, 120px);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--c0);
+  color: var(--cw);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* =============================================
+   CUSTOM CURSOR — desktop only
+   ============================================= */
+.cursor-dot, .cursor-ring {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+}
+.cursor-dot {
+  width: 8px; height: 8px;
+  background: var(--ca);
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--ca);
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  transition: all 0.15s;
+  opacity: 0.6;
+  mix-blend-mode: difference;
+}
+
+/* =============================================
+   NOISE OVERLAY
+   ============================================= */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* =============================================
+   NAVBAR
+   ============================================= */
+.nav {
+  position: fixed; top: 0; width: 100%;
+  z-index: 1000;
+  padding: 20px var(--sec-px);
+  display: flex; justify-content: space-between; align-items: center;
+  transition: all 0.5s;
+}
+.nav.scrolled {
+  padding: 10px var(--sec-px);
+  background: rgba(2,13,31,0.92);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-bottom: 1px solid rgba(0,212,255,0.1);
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-head);
+  font-size: clamp(20px, 4vw, 26px);
+  letter-spacing: 2px;
+  color: var(--ca);
+  text-decoration: none;
+  text-shadow: var(--neon);
+  flex-shrink: 0;
+}
+.nav-logo img { height: clamp(30px, 5vw, 40px); filter: drop-shadow(0 0 12px #00d4ff99); }
+
+.nav-links {
+  display: flex; gap: clamp(16px, 3vw, 36px); align-items: center;
+}
+.nav-links a {
+  text-decoration: none;
+  color: rgba(255,255,255,0.7);
+  font-size: clamp(12px, 1.5vw, 14px); font-weight: 500; letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+  transition: color var(--t);
+  white-space: nowrap;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--ca);
+  transition: width var(--t);
+  box-shadow: 0 0 8px var(--ca);
+}
+.nav-links a:hover { color: var(--ca); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  padding: 8px 20px;
+  background: transparent;
+  border: 1px solid var(--ca);
+  color: var(--ca) !important;
+  border-radius: 4px;
+  font-size: 12px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase;
+  transition: all var(--t) !important;
+  position: relative; overflow: hidden;
+}
+.nav-cta::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--ca);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--t);
+  z-index: -1;
+}
+.nav-cta:hover { color: var(--c0) !important; }
+.nav-cta:hover::before { transform: scaleX(1); }
+
+/* Hamburger */
+.nav-menu {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  color: var(--ca); font-size: 22px;
+  padding: 6px; z-index: 1002;
+  flex-shrink: 0;
+}
+
+/* Mobile nav overlay */
+.nav-mobile {
+  display: none;
+  position: fixed; inset: 0; top: 0;
+  background: rgba(2,13,31,0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1001;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 32px;
+  padding: 80px 24px 40px;
+}
+.nav-mobile.open { display: flex; }
+.nav-mobile a {
+  font-family: var(--font-head);
+  font-size: clamp(28px, 7vw, 40px);
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-mobile a:hover, .nav-mobile a.cta { color: var(--ca); }
+.nav-mobile-close {
+  position: absolute; top: 20px; right: 20px;
+  background: none; border: none;
+  color: rgba(255,255,255,0.6); font-size: 24px;
+  cursor: pointer; padding: 8px;
+}
+
+/* =============================================
+   HERO
+   ============================================= */
+.hero {
+  min-height: 100svh;
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: center;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 60% 40%, #0a2d5a 0%, var(--c0) 70%);
+}
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  width: min(800px, 100vw); height: min(800px, 100vw);
+  background: radial-gradient(circle, #00d4ff22 0%, transparent 70%);
+  top: -200px; right: -100px;
+  animation: blobFloat 12s ease-in-out infinite;
+}
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  width: min(600px, 80vw); height: min(600px, 80vw);
+  background: radial-gradient(circle, #0077ff18 0%, transparent 70%);
+  bottom: -100px; left: -100px;
+  animation: blobFloat 14s ease-in-out infinite reverse;
+}
+
+.particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.particle {
+  position: absolute; background: var(--ca); border-radius: 50%;
+  opacity: 0; animation: particleFall linear infinite;
+}
+
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+  background-size: clamp(40px, 8vw, 80px) clamp(40px, 8vw, 80px);
+}
+
+.hero-inner {
+  position: relative; z-index: 2;
+  max-width: 1300px; margin: 0 auto;
+  padding: 100px var(--sec-px) 60px;
+  display: flex; align-items: center; gap: clamp(30px, 6vw, 80px);
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: min(300px, 100%);
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: clamp(10px, 2vw, 12px); letter-spacing: 4px; text-transform: uppercase;
+  color: var(--ca);
+  margin-bottom: 20px;
+  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-eyebrow span { width: 30px; height: 1px; background: var(--ca); box-shadow: 0 0 8px var(--ca); }
+
+.hero-h1 {
+  font-family: var(--font-head);
+  font-size: clamp(52px, 12vw, 110px);
+  line-height: 0.95;
+  letter-spacing: 2px;
+  opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+}
+.hero-h1 em {
+  font-style: normal;
+  background: var(--cg);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  display: block;
+  filter: drop-shadow(0 0 20px #00d4ff66);
+}
+
+.hero-p {
+  font-size: clamp(14px, 2.5vw, 17px); line-height: 1.8;
+  color: rgba(255,255,255,0.6);
+  max-width: 440px;
+  margin: 20px 0 32px;
+  opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+}
+
+.hero-btns {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+}
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: clamp(12px, 2vw, 15px) clamp(20px, 3vw, 32px);
+  background: var(--cg);
+  color: white; text-decoration: none;
+  font-weight: 600; font-size: clamp(13px, 2vw, 14px); letter-spacing: 1px;
+  border-radius: 4px;
+  box-shadow: 0 0 30px #00d4ff44;
+  transition: all var(--t);
+  position: relative; overflow: hidden;
+  white-space: nowrap;
+}
+.btn-primary::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(135deg,#0077ff,#00d4ff);
+  opacity: 0; transition: opacity var(--t);
+}
+.btn-primary:hover { box-shadow: 0 0 50px #00d4ff66; transform: translateY(-2px); }
+.btn-primary:hover::before { opacity: 1; }
+.btn-primary span { position: relative; z-index: 1; }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: clamp(12px, 2vw, 15px) clamp(20px, 3vw, 32px);
+  border: 1px solid rgba(0,212,255,0.4);
+  color: rgba(255,255,255,0.8); text-decoration: none;
+  font-size: clamp(13px, 2vw, 14px); letter-spacing: 1px;
+  border-radius: 4px; transition: all var(--t);
+  white-space: nowrap;
+}
+.btn-ghost:hover { border-color: var(--ca); color: var(--ca); background: rgba(0,212,255,0.05); }
+
+/* Hero Visual */
+.hero-visual {
+  flex: 1;
+  display: flex; justify-content: center; align-items: center;
+  position: relative;
+  min-width: min(260px, 100%);
+  opacity: 0; animation: fadeIn 1.2s 0.8s forwards;
+}
+
+.bottle-3d-wrap {
+  position: relative;
+  width: clamp(200px, 40vw, 320px);
+  height: clamp(340px, 60vw, 520px);
+}
+
+.bottle-scene {
+  position: relative; width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.bottle-svg {
+  width: clamp(140px, 28vw, 200px);
+  height: auto;
+  filter: drop-shadow(0 30px 80px #00d4ff55) drop-shadow(0 0 40px #0077ff33);
+  animation: bottleFloat 5s ease-in-out infinite;
+}
+
+.bottle-ring {
+  position: absolute; bottom: -30px; left: 50%;
+  transform: translateX(-50%);
+  width: clamp(120px, 25vw, 200px); height: 25px;
+  background: radial-gradient(ellipse, rgba(0,212,255,0.4) 0%, transparent 70%);
+  border-radius: 50%; filter: blur(8px);
+  animation: bottleFloat 5s ease-in-out infinite;
+}
+
+.orbit {
+  position: absolute; inset: -50px;
+  border-radius: 50%; border: 1px dashed rgba(0,212,255,0.12);
+  animation: spin 20s linear infinite;
+}
+.orbit::before {
+  content: ""; position: absolute;
+  width: 8px; height: 8px; background: var(--ca); border-radius: 50%;
+  top: -4px; left: 50%; transform: translateX(-50%);
+  box-shadow: 0 0 12px var(--ca);
+}
+.orbit-2 { inset: -100px; animation-duration: 14s; animation-direction: reverse; border-color: rgba(0,119,255,0.08); }
+.orbit-2::before { background: var(--cb); box-shadow: 0 0 12px var(--cb); }
+
+.hero-stats {
+  position: absolute; right: -10px; top: 50%;
+  transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 12px;
+}
+.stat-badge {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(0,212,255,0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: clamp(10px, 2vw, 14px) clamp(14px, 2.5vw, 20px);
+  border-radius: 8px; text-align: center;
+  position: relative; overflow: hidden; transition: all var(--t);
+}
+.stat-badge::before { content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--cg); }
+.stat-num { font-family: var(--font-head); font-size: clamp(20px, 4vw, 28px); background: var(--cg); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.stat-label { font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; }
+
+.scroll-hint {
+  position: absolute; bottom: 24px; left: var(--sec-px);
+  display: flex; align-items: center; gap: 14px;
+  font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 3px; text-transform: uppercase;
+  opacity: 0; animation: fadeIn 1s 1.5s forwards;
+}
+.scroll-line {
+  width: 40px; height: 1px;
+  background: linear-gradient(90deg, var(--ca), transparent);
+  position: relative; overflow: hidden;
+}
+.scroll-line::after {
+  content: ""; position: absolute; inset: 0;
+  background: white; transform: translateX(-100%);
+  animation: scanLine 2s ease-in-out infinite;
+}
+
+/* =============================================
+   SECTION BASE
+   ============================================= */
+section { padding: var(--sec-py) var(--sec-px); }
+.container { max-width: 1300px; margin: 0 auto; }
+
+.s-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--ca); margin-bottom: 16px;
+}
+.s-label::before { content: ""; width: 24px; height: 1px; background: var(--ca); box-shadow: 0 0 8px var(--ca); }
+
+.s-title {
+  font-family: var(--font-head);
+  font-size: clamp(36px, 7vw, 72px);
+  line-height: 1; letter-spacing: 2px;
+}
+.s-title em { font-style: normal; background: var(--cg); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.s-sub {
+  font-size: clamp(14px, 2.5vw, 16px); color: rgba(255,255,255,0.5); line-height: 1.7;
+  max-width: 500px; margin-top: 14px;
+}
+
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal.vis { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d4 { transition-delay: 0.4s; }
+
+/* =============================================
+   MARQUEE
+   ============================================= */
+.marquee-wrap {
+  padding: 18px 0;
+  background: rgba(0,212,255,0.04);
+  border-top: 1px solid rgba(0,212,255,0.08);
+  border-bottom: 1px solid rgba(0,212,255,0.08);
+  overflow: hidden; white-space: nowrap;
+}
+.marquee-track { display: inline-flex; gap: 40px; animation: marqueeScroll 20s linear infinite; }
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--font-head); font-size: clamp(14px, 3vw, 20px); letter-spacing: 3px;
+  color: rgba(255,255,255,0.3);
+}
+.marquee-item i { color: var(--ca); font-size: 12px; }
+
+/* =============================================
+   SERVICES
+   ============================================= */
+.services-section { background: linear-gradient(180deg, var(--c0) 0%, var(--c1) 100%); }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 2px;
+  margin-top: clamp(40px, 6vw, 70px);
+  border: 1px solid rgba(0,212,255,0.08);
+  border-radius: 2px; overflow: hidden;
+}
+
+.svc-card {
+  background: rgba(4,21,48,0.6);
+  padding: clamp(28px, 5vw, 50px) clamp(20px, 4vw, 40px);
+  position: relative; overflow: hidden;
+  transition: all 0.5s; cursor: pointer;
+}
+.svc-card::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0,212,255,0.06), transparent);
+  opacity: 0; transition: opacity 0.5s;
+}
+.svc-card:hover { background: rgba(7,38,84,0.8); }
+.svc-card:hover::before { opacity: 1; }
+.svc-card.featured { background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,119,255,0.06)); }
+.svc-card::after {
+  content: ""; position: absolute; top: 0; left: 0;
+  width: 0; height: 2px;
+  background: var(--cg); transition: width 0.5s;
+  box-shadow: var(--neon);
+}
+.svc-card:hover::after { width: 100%; }
+
+.svc-num {
+  font-family: var(--font-head); font-size: clamp(48px, 8vw, 72px);
+  color: rgba(0,212,255,0.07); line-height: 1;
+  position: absolute; top: 16px; right: 24px; transition: color 0.5s;
+}
+.svc-card:hover .svc-num { color: rgba(0,212,255,0.12); }
+
+.svc-icon {
+  width: 52px; height: 52px;
+  background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.2);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 24px; transition: all 0.5s; position: relative;
+}
+.svc-card:hover .svc-icon { background: rgba(0,212,255,0.15); border-color: var(--ca); box-shadow: 0 0 20px rgba(0,212,255,0.3); }
+
+.svc-title { font-family: var(--font-head); font-size: clamp(22px, 4vw, 28px); letter-spacing: 1px; margin-bottom: 12px; }
+.svc-desc { font-size: clamp(13px, 2vw, 14px); color: rgba(255,255,255,0.55); line-height: 1.8; margin-bottom: 24px; }
+
+.svc-features { list-style: none; margin-bottom: 32px; }
+.svc-features li {
+  font-size: clamp(12px, 2vw, 13px); color: rgba(255,255,255,0.7);
+  padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex; align-items: center; gap: 10px;
+}
+.svc-features li::before {
+  content: ""; width: 5px; height: 5px;
+  background: var(--ca); border-radius: 50%; flex-shrink: 0;
+  box-shadow: 0 0 6px var(--ca);
+}
+
+.svc-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ca); text-decoration: none;
+  background: none; border: none; cursor: pointer; font-family: var(--font-body);
+  transition: gap 0.3s;
+}
+.svc-btn:hover { gap: 16px; }
+.svc-btn i { font-size: 11px; }
+
+.badge-featured {
+  position: absolute; top: 20px; right: 20px;
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--ca); background: rgba(0,212,255,0.1);
+  border: 1px solid rgba(0,212,255,0.3);
+  padding: 4px 12px; border-radius: 2px;
+}
+
+/* =============================================
+   WHY US
+   ============================================= */
+.why-section { background: var(--c1); position: relative; overflow: hidden; }
+.why-section::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(0,119,255,0.06) 0%, transparent 70%);
+}
+
+.why-layout { display: flex; align-items: center; gap: clamp(40px, 8vw, 100px); flex-wrap: wrap; }
+.why-left { flex: 1; min-width: min(280px, 100%); }
+.why-right { flex: 1; min-width: min(280px, 100%); }
+
+.why-list { display: flex; flex-direction: column; gap: 2px; margin-top: clamp(30px, 5vw, 50px); }
+
+.why-item {
+  display: flex; align-items: flex-start; gap: 20px;
+  padding: clamp(18px, 3vw, 28px) clamp(16px, 3vw, 32px);
+  border: 1px solid rgba(0,212,255,0.06);
+  background: rgba(0,0,0,0.2);
+  position: relative; overflow: hidden; transition: all 0.4s; cursor: pointer;
+}
+.why-item:hover, .why-item.active { background: rgba(0,212,255,0.04); border-color: rgba(0,212,255,0.2); }
+.why-item::before {
+  content: ""; position: absolute; left: 0; top: 0;
+  width: 3px; height: 0; background: var(--cg); transition: height 0.4s; box-shadow: var(--neon);
+}
+.why-item:hover::before, .why-item.active::before { height: 100%; }
+
+.why-icon { width: 40px; height: 40px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--ca); }
+.why-text h4 { font-size: clamp(14px, 2.5vw, 17px); font-weight: 600; margin-bottom: 5px; }
+.why-text p { font-size: clamp(12px, 2vw, 13px); color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+.why-visual {
+  position: relative; height: clamp(280px, 50vw, 500px); width: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+.why-circle {
+  width: clamp(240px, 40vw, 360px); height: clamp(240px, 40vw, 360px);
+  border-radius: 50%; border: 1px solid rgba(0,212,255,0.1);
+  position: relative; display: flex; align-items: center; justify-content: center;
+}
+.why-circle::before {
+  content: ""; position: absolute; inset: 20px;
+  border-radius: 50%; border: 1px dashed rgba(0,212,255,0.12);
+  animation: spin 25s linear infinite;
+}
+.why-circle::after {
+  content: ""; position: absolute; inset: 40px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
+}
+.why-center { text-align: center; position: relative; z-index: 1; }
+.why-center .big-num {
+  font-family: var(--font-head); font-size: clamp(50px, 10vw, 80px);
+  background: var(--cg); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  line-height: 1; filter: drop-shadow(0 0 30px #00d4ff55);
+}
+.why-center p { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 2px; text-transform: uppercase; }
+
+.float-badge {
+  position: absolute;
+  background: rgba(4,21,48,0.9); border: 1px solid rgba(0,212,255,0.2);
+  padding: 10px 14px; border-radius: 8px;
+  font-size: clamp(10px, 2vw, 12px); backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px); white-space: nowrap;
+}
+.float-badge strong { display: block; font-family: var(--font-head); font-size: clamp(16px, 3vw, 20px); color: var(--ca); }
+.fb1 { top: clamp(10px, 3vw, 40px); left: -10px; }
+.fb2 { top: clamp(10px, 3vw, 40px); right: -10px; }
+.fb3 { bottom: clamp(10px, 3vw, 40px); left: -10px; }
+.fb4 { bottom: clamp(10px, 3vw, 40px); right: -10px; }
+
+/* =============================================
+   EVENTS
+   ============================================= */
+.events-section { background: var(--c0); }
+.events-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: clamp(40px, 6vw, 70px);
+}
+.ev-card {
+  position: relative; overflow: hidden;
+  height: clamp(220px, 35vw, 320px);
+  background: linear-gradient(135deg, var(--c1), var(--c2)); cursor: pointer;
+}
+.ev-card.tall { grid-column: 3; grid-row: 1 / span 2; height: auto; min-height: clamp(400px, 70vw, 642px); }
+.ev-card-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,212,255,0.05), rgba(0,119,255,0.05)); transition: opacity 0.5s; }
+.ev-card:hover .ev-card-bg { opacity: 0; }
+.ev-icon { font-size: clamp(32px, 6vw, 48px); position: absolute; top: clamp(20px, 4vw, 40px); left: clamp(20px, 4vw, 40px); z-index: 2; }
+.ev-line { position: absolute; top: 0; right: 0; width: 1px; height: 0; background: var(--cg); transition: height 0.6s; box-shadow: var(--neon); }
+.ev-card:hover .ev-line { height: 100%; }
+.ev-content { position: absolute; bottom: clamp(20px, 4vw, 40px); left: clamp(20px, 4vw, 40px); right: clamp(20px, 4vw, 40px); z-index: 2; }
+.ev-content h3 { font-family: var(--font-head); font-size: clamp(20px, 4vw, 30px); letter-spacing: 1px; margin-bottom: 6px; }
+.ev-content p { font-size: clamp(12px, 2vw, 14px); color: rgba(255,255,255,0.55); line-height: 1.6; }
+.ev-tag {
+  display: inline-block; font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--ca); background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.2);
+  padding: 4px 10px; border-radius: 2px; margin-bottom: 10px;
+}
+
+/* =============================================
+   OFFER
+   ============================================= */
+.offer-section {
+  padding: 0;
+  background: linear-gradient(135deg, #041530 0%, #072654 50%, #041530 100%);
+  position: relative; overflow: hidden;
+}
+.offer-section::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 40% 60% at 20% 50%, rgba(0,212,255,0.1) 0%, transparent 60%),
+              radial-gradient(ellipse 40% 60% at 80% 50%, rgba(0,119,255,0.08) 0%, transparent 60%);
+}
+.offer-inner {
+  max-width: 1300px; margin: 0 auto;
+  display: flex; align-items: center;
+  padding: clamp(60px, 8vw, 100px) var(--sec-px);
+  gap: clamp(30px, 6vw, 80px); flex-wrap: wrap; position: relative; z-index: 1;
+}
+.offer-left { flex: 1; min-width: min(280px, 100%); }
+.offer-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #00ffcc; margin-bottom: 20px;
+}
+.offer-tag::before { content: ""; width: 24px; height: 1px; background: #00ffcc; box-shadow: 0 0 8px #00ffcc; }
+.offer-left h2 {
+  font-family: var(--font-head);
+  font-size: clamp(40px, 8vw, 80px);
+  line-height: 1; letter-spacing: 2px; margin-bottom: 16px;
+}
+.offer-left h2 span { background: linear-gradient(135deg,#00ffcc,#00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.offer-left p { font-size: clamp(14px, 2.5vw, 16px); color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 28px; }
+
+.offer-pill {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(0,255,204,0.2);
+  padding: 8px 8px 8px 16px; border-radius: 100px; margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.offer-pill-text { font-size: clamp(12px, 2.5vw, 14px); font-weight: 600; }
+.offer-pill-badge {
+  background: linear-gradient(135deg,#00ffcc,#00d4ff); color: var(--c0);
+  padding: 7px 16px; border-radius: 100px; font-size: 13px; font-weight: 700;
+}
+
+.offer-right {
+  flex: 1; min-width: min(240px, 100%);
+  display: flex; justify-content: center; align-items: center;
+}
+.dispenser-wrap { position: relative; padding: 40px; text-align: center; }
+.dispenser-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle, rgba(0,212,255,0.2) 0%, transparent 60%);
+  animation: pulse 3s ease-in-out infinite;
+}
+.dispenser-wrap img {
+  width: clamp(140px, 25vw, 220px); position: relative; z-index: 1;
+  filter: drop-shadow(0 20px 60px rgba(0,212,255,0.5));
+  animation: bottleFloat 4s ease-in-out infinite;
+}
+.dispenser-badge {
+  position: absolute; background: #00ffcc; color: var(--c0);
+  font-weight: 800; font-size: 12px; padding: 7px 14px; border-radius: 4px;
+}
+.db1 { top: 16px; right: 0; transform: rotate(8deg); }
+.db2 { bottom: 16px; left: 0; transform: rotate(-6deg); }
+
+/* =============================================
+   TESTIMONIALS
+   ============================================= */
+.testi-section { background: var(--c1); position: relative; overflow: hidden; }
+.testi-section::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 50% at 50% 0%, rgba(0,212,255,0.05) 0%, transparent 60%);
+}
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 2px; margin-top: clamp(40px, 6vw, 70px);
+}
+.testi-card {
+  background: rgba(2,13,31,0.6);
+  padding: clamp(28px, 4vw, 44px) clamp(20px, 3vw, 36px);
+  position: relative; overflow: hidden; transition: all 0.4s;
+  border: 1px solid rgba(0,212,255,0.05);
+}
+.testi-card:hover { background: rgba(7,38,84,0.4); border-color: rgba(0,212,255,0.15); }
+.testi-card::before {
+  content: "\201C"; font-family: Georgia, serif; font-size: 100px;
+  color: rgba(0,212,255,0.05); position: absolute; top: -20px; left: 16px; line-height: 1; pointer-events: none;
+}
+.testi-stars { color: var(--ca); font-size: 12px; letter-spacing: 3px; margin-bottom: 16px; }
+.testi-text { font-size: clamp(13px, 2vw, 15px); color: rgba(255,255,255,0.7); line-height: 1.9; margin-bottom: 24px; }
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.testi-avatar {
+  width: 42px; height: 42px; border-radius: 50%; background: var(--cg);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-size: 18px; flex-shrink: 0;
+}
+.testi-name { font-size: 15px; font-weight: 600; }
+.testi-role { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 1px; }
+
+/* =============================================
+   GALLERY
+   ============================================= */
+.gallery-section {
+  background: var(--c0);
+  padding: var(--sec-py) var(--sec-px);
+  position: relative; overflow: hidden;
+}
+.gallery-section::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(0,119,255,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.gallery-header { text-align: center; margin-bottom: clamp(40px, 6vw, 60px); }
+.gallery-filters {
+  display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 28px;
+}
+.g-filter {
+  padding: 8px 18px; border: 1px solid rgba(0,212,255,0.18);
+  background: transparent; color: rgba(255,255,255,0.55);
+  font-family: var(--font-body); font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  border-radius: 3px; cursor: pointer; transition: all 0.3s; white-space: nowrap;
+}
+.g-filter:hover, .g-filter.active {
+  border-color: var(--ca); color: var(--ca);
+  background: rgba(0,212,255,0.07); box-shadow: 0 0 16px rgba(0,212,255,0.12);
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+.g-item {
+  position: relative; overflow: hidden; cursor: pointer;
+  background: var(--c1); border: 1px solid rgba(0,212,255,0.06);
+  aspect-ratio: 3/4; transition: opacity 0.4s, transform 0.4s;
+}
+.g-item img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  display: block; transition: transform 0.7s cubic-bezier(.25,.8,.25,1);
+}
+.g-item:hover img { transform: scale(1.06); }
+.g-item::before {
+  content: ""; position: absolute; top: 0; left: 0;
+  width: 0; height: 2px; background: var(--cg); z-index: 2;
+  transition: width 0.5s; box-shadow: var(--neon);
+}
+.g-item:hover::before { width: 100%; }
+.g-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(2,13,31,0.92) 0%, rgba(2,13,31,0.2) 50%, transparent 100%);
+  opacity: 0; transition: opacity 0.4s;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: clamp(14px, 3vw, 28px) clamp(12px, 2.5vw, 24px); z-index: 1;
+}
+.g-item:hover .g-overlay { opacity: 1; }
+.g-tag {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--ca); background: rgba(0,212,255,0.12);
+  border: 1px solid rgba(0,212,255,0.25);
+  padding: 3px 8px; border-radius: 2px; display: inline-block;
+  width: fit-content; margin-bottom: 6px;
+  transform: translateY(10px); transition: transform 0.4s 0.05s;
+}
+.g-item:hover .g-tag { transform: translateY(0); }
+.g-title {
+  font-family: var(--font-head); font-size: clamp(15px, 3vw, 20px); letter-spacing: 1px; line-height: 1.2;
+  transform: translateY(10px); transition: transform 0.4s 0.1s;
+}
+.g-item:hover .g-title { transform: translateY(0); }
+.g-action {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.7); margin-top: 10px;
+  transform: translateY(10px); transition: transform 0.4s 0.15s, color 0.3s;
+}
+.g-item:hover .g-action { transform: translateY(0); }
+.g-action i { font-size: 10px; transition: transform 0.3s; }
+.g-item:hover .g-action i { transform: translateX(4px); }
+.g-badge {
+  position: absolute; top: 10px; right: 10px; z-index: 3;
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  background: rgba(2,13,31,0.85); border: 1px solid rgba(0,212,255,0.25);
+  padding: 3px 8px; border-radius: 2px; color: rgba(255,255,255,0.7);
+  backdrop-filter: blur(8px); pointer-events: none;
+}
+.g-badge.hot { background: rgba(0,212,255,0.18); border-color: var(--ca); color: var(--ca); }
+.g-item.hidden { opacity: 0; pointer-events: none; transform: scale(0.95); position: absolute; visibility: hidden; }
+
+/* LIGHTBOX */
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 99990;
+  background: rgba(2,13,31,0.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+.lightbox.open { display: flex; }
+.lb-inner { position: relative; max-width: 620px; width: 100%; animation: lbIn 0.35s cubic-bezier(.25,.8,.25,1); }
+.lb-img { width: 100%; max-height: 80vh; object-fit: contain; border: 1px solid rgba(0,212,255,0.15); display: block; border-radius: 2px; }
+.lb-close {
+  position: absolute; top: -48px; right: 0;
+  width: 38px; height: 38px; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,212,255,0.2); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.7); font-size: 15px; cursor: pointer; transition: all 0.3s;
+}
+.lb-close:hover { border-color: var(--ca); color: var(--ca); }
+.lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px; background: rgba(2,13,31,0.85);
+  border: 1px solid rgba(0,212,255,0.2); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.7); font-size: 14px; cursor: pointer; transition: all 0.3s; z-index: 2;
+}
+.lb-nav:hover { border-color: var(--ca); color: var(--ca); background: rgba(0,212,255,0.1); }
+.lb-prev { left: -50px; }
+.lb-next { right: -50px; }
+.lb-caption { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; }
+.lb-counter { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 3px; }
+.lb-dots { display: flex; gap: 6px; }
+.lb-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,212,255,0.25); cursor: pointer; transition: all 0.3s; border: none; }
+.lb-dot.active { background: var(--ca); box-shadow: 0 0 8px var(--ca); transform: scale(1.3); }
+
+/* =============================================
+   CONTACT
+   ============================================= */
+.contact-section { background: var(--c0); position: relative; overflow: hidden; }
+.contact-section::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 100%, rgba(0,119,255,0.06) 0%, transparent 70%);
+}
+.contact-layout { display: flex; gap: clamp(40px, 6vw, 80px); align-items: flex-start; flex-wrap: wrap; margin-top: clamp(40px, 6vw, 70px); }
+.contact-left { flex: 1; min-width: min(280px, 100%); position: relative; z-index: 1; }
+.contact-right { flex: 1.2; min-width: min(280px, 100%); position: relative; z-index: 1; }
+.c-info-list { display: flex; flex-direction: column; gap: 2px; margin-top: 32px; }
+.c-info-item {
+  display: flex; align-items: center; gap: 16px;
+  padding: clamp(14px, 3vw, 20px) clamp(16px, 3vw, 24px);
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(0,212,255,0.06); transition: all 0.4s;
+}
+.c-info-item:hover { background: rgba(0,212,255,0.04); border-color: rgba(0,212,255,0.2); }
+.c-icon { width: 38px; height: 38px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--ca); font-size: 16px; }
+.c-text h5 { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.c-text p { font-size: 12px; color: rgba(255,255,255,0.5); word-break: break-word; }
+.c-social { display: flex; gap: 10px; margin-top: 24px; }
+.c-soc-btn {
+  width: 42px; height: 42px; background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(0,212,255,0.12); border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.6); font-size: 16px; text-decoration: none; transition: all 0.3s;
+}
+.c-soc-btn:hover { background: rgba(0,212,255,0.1); border-color: var(--ca); color: var(--ca); box-shadow: 0 0 20px rgba(0,212,255,0.2); }
+
+.c-form { display: flex; flex-direction: column; gap: 14px; }
+.c-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.c-field { display: flex; flex-direction: column; gap: 7px; }
+.c-field label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.c-field input, .c-field select, .c-field textarea {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(0,212,255,0.1);
+  border-radius: 4px; padding: 13px 14px;
+  color: white; font-family: var(--font-body); font-size: clamp(13px, 2vw, 14px);
+  outline: none; transition: all 0.3s; appearance: none; -webkit-appearance: none; width: 100%;
+}
+.c-field input::placeholder, .c-field textarea::placeholder { color: rgba(255,255,255,0.2); }
+.c-field input:focus, .c-field select:focus, .c-field textarea:focus {
+  border-color: var(--ca); background: rgba(0,212,255,0.04); box-shadow: 0 0 0 3px rgba(0,212,255,0.08);
+}
+.c-field select option { background: var(--c1); }
+.c-field textarea { height: 110px; resize: vertical; min-height: 80px; }
+.c-submit {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: clamp(13px, 2.5vw, 16px) clamp(20px, 3vw, 32px);
+  background: var(--cg); border: none; border-radius: 4px;
+  color: white; font-family: var(--font-body); font-size: 14px;
+  font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; box-shadow: 0 0 30px rgba(0,212,255,0.3);
+  transition: all 0.4s; position: relative; overflow: hidden; width: 100%;
+}
+.c-submit::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(135deg,#0077ff,#00d4ff);
+  opacity: 0; transition: opacity 0.3s;
+}
+.c-submit:hover { box-shadow: 0 0 50px rgba(0,212,255,0.5); transform: translateY(-2px); }
+.c-submit:hover::before { opacity: 1; }
+.c-submit span, .c-submit i { position: relative; z-index: 1; }
+.c-submit.sent { background: linear-gradient(135deg,#00c853,#69f0ae); box-shadow: 0 0 30px rgba(0,200,83,0.3); }
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.footer {
+  background: #020a18; border-top: 1px solid rgba(0,212,255,0.08);
+  padding: clamp(50px, 8vw, 80px) var(--sec-px) clamp(20px, 4vw, 32px);
+}
+.footer-grid {
+  max-width: 1300px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: clamp(30px, 5vw, 60px);
+  margin-bottom: clamp(40px, 6vw, 60px);
+}
+.footer-brand-logo {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+  font-family: var(--font-head); font-size: clamp(20px, 3vw, 24px); letter-spacing: 2px; color: var(--ca);
+  text-shadow: var(--neon);
+}
+.footer-brand-logo img { height: clamp(30px, 4vw, 38px); filter: drop-shadow(0 0 10px #00d4ff88); }
+.footer-desc { font-size: clamp(13px, 2vw, 14px); color: rgba(255,255,255,0.45); line-height: 1.9; margin-bottom: 24px; }
+.footer-h { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a {
+  text-decoration: none; color: rgba(255,255,255,0.55); font-size: clamp(13px, 2vw, 14px);
+  transition: all 0.3s; display: inline-flex; align-items: center; gap: 8px;
+}
+.footer-links a::before { content: ""; width: 0; height: 1px; background: var(--ca); transition: width 0.3s; flex-shrink: 0; }
+.footer-links a:hover { color: var(--ca); padding-left: 4px; }
+.footer-links a:hover::before { width: 12px; }
+.footer-contacts { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-contacts li { font-size: clamp(12px, 2vw, 14px); color: rgba(255,255,255,0.55); display: flex; align-items: flex-start; gap: 10px; word-break: break-word; }
+.footer-contacts li i { color: var(--ca); width: 16px; margin-top: 2px; flex-shrink: 0; }
+.footer-socials { display: flex; gap: 10px; margin-top: 18px; }
+.footer-soc {
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(0,212,255,0.12); border-radius: 4px;
+  color: rgba(255,255,255,0.5); font-size: 15px; text-decoration: none; transition: all 0.3s;
+}
+.footer-soc:hover { border-color: var(--ca); color: var(--ca); box-shadow: 0 0 16px rgba(0,212,255,0.2); }
+.footer-bottom {
+  max-width: 1300px; margin: 0 auto;
+  padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+  font-size: clamp(11px, 2vw, 13px); color: rgba(255,255,255,0.3);
+}
+.footer-bottom span { color: var(--ca); }
+
+/* =============================================
+   WHATSAPP FLOAT
+   ============================================= */
+.wa-btn {
+  position: fixed; bottom: clamp(20px, 4vw, 32px); right: clamp(20px, 4vw, 32px);
+  width: clamp(52px, 8vw, 64px); height: clamp(52px, 8vw, 64px);
+  background: #25D366; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: clamp(22px, 4vw, 28px); color: white; text-decoration: none;
+  z-index: 999; box-shadow: 0 8px 24px rgba(37,211,102,0.4); transition: all 0.3s;
+}
+.wa-btn:hover { transform: scale(1.1); box-shadow: 0 12px 36px rgba(37,211,102,0.6); }
+.wa-btn::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: #25D366; opacity: 0.5; animation: waPulse 2s ease-out infinite;
+}
+
+/* =============================================
+   KEYFRAMES
+   ============================================= */
+@keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes blobFloat { 0%,100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.05); } }
+@keyframes bottleFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes scanLine { 0% { transform: translateX(-100%); } 100% { transform: translateX(400%); } }
+@keyframes pulse { 0%,100% { opacity:0.3; transform:scale(1); } 50% { opacity:0.6; transform:scale(1.05); } }
+@keyframes waPulse { 0% { transform:scale(1); opacity:0.5; } 70% { transform:scale(1.7); opacity:0; } 100% { transform:scale(1.7); opacity:0; } }
+@keyframes particleFall { 0% { transform:translateY(-20px) scale(0); opacity:0; } 10% { opacity:1; } 90% { opacity:0.3; } 100% { transform:translateY(100vh) scale(0.3); opacity:0; } }
+@keyframes lbIn { from { opacity:0; transform:scale(0.94) translateY(10px); } to { opacity:1; transform:scale(1) translateY(0); } }
+
+/* =============================================
+   RESPONSIVE: TABLET (≤ 1024px)
+   ============================================= */
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .events-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .ev-card.tall {
+    grid-column: 1 / span 2;
+    grid-row: auto;
+    min-height: clamp(280px, 40vw, 360px);
+    height: auto;
+  }
+  .hero-stats { right: -5px; }
+  .orbit { inset: -30px; }
+  .orbit-2 { inset: -70px; }
+}
+
+/* =============================================
+   RESPONSIVE: MOBILE (≤ 768px)
+   ============================================= */
+@media (max-width: 768px) {
+  body { cursor: auto; }
+  .cursor-dot, .cursor-ring { display: none; }
+
+  /* Nav */
+  .nav-links { display: none; }
+  .nav-menu { display: block; }
+  .nav { padding: 14px var(--sec-px); }
+  .nav.scrolled { padding: 10px var(--sec-px); }
+
+  /* Hero */
+  .hero-inner {
+    flex-direction: column;
+    padding-top: 90px;
+    padding-bottom: 40px;
+    text-align: center;
+    gap: 30px;
+  }
+  .hero-text { min-width: 100%; }
+  .hero-p { margin-left: auto; margin-right: auto; }
+  .hero-btns { justify-content: center; }
+  .hero-eyebrow { justify-content: center; }
+  .hero-visual { width: 100%; }
+  .hero-stats { display: none; }
+  .orbit { inset: -20px; }
+  .orbit-2 { inset: -50px; }
+  .scroll-hint { bottom: 16px; font-size: 9px; }
+  .bottle-3d-wrap { width: clamp(180px, 50vw, 240px); height: clamp(300px, 65vw, 380px); }
+
+  /* Services */
+  .services-grid { grid-template-columns: 1fr; }
+
+  /* Why */
+  .why-layout { flex-direction: column; gap: 40px; }
+  .why-right { width: 100%; order: -1; }
+  .why-visual { height: clamp(260px, 70vw, 340px); }
+  .fb1, .fb3 { left: 0; }
+  .fb2, .fb4 { right: 0; }
+
+  /* Events */
+  .events-grid { grid-template-columns: 1fr; }
+  .ev-card { height: clamp(200px, 50vw, 260px); }
+  .ev-card.tall { grid-column: auto; grid-row: auto; min-height: clamp(240px, 55vw, 300px); }
+
+  /* Testimonials */
+  .testi-grid { grid-template-columns: 1fr; }
+
+  /* Gallery */
+  .gallery-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+  .g-item { aspect-ratio: 2/3; }
+  .lb-prev { left: 4px; }
+  .lb-next { right: 4px; }
+  .lb-inner { max-width: 96vw; }
+
+  /* Contact */
+  .contact-layout { flex-direction: column; }
+  .c-row { grid-template-columns: 1fr; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  /* Offer */
+  .offer-inner { flex-direction: column; text-align: center; }
+  .offer-left { min-width: 100%; }
+  .offer-tag { justify-content: center; }
+  .offer-pill { justify-content: center; }
+  .offer-left p { margin-left: auto; margin-right: auto; }
+}
+
+/* =============================================
+   RESPONSIVE: SMALL MOBILE (≤ 480px)
+   ============================================= */
+@media (max-width: 480px) {
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-filters { gap: 6px; }
+  .g-filter { padding: 7px 12px; font-size: 10px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .hero-h1 { font-size: clamp(44px, 14vw, 72px); line-height: 0.95; }
+  .btn-primary, .btn-ghost { font-size: 12px; padding: 12px 18px; }
+  .c-row { grid-template-columns: 1fr; }
+  .ev-card { height: clamp(180px, 55vw, 240px); }
+  .ev-card.tall { min-height: clamp(220px, 60vw, 280px); }
+  .float-badge { font-size: 9px; padding: 8px 10px; }
+  .float-badge strong { font-size: 14px; }
+}
+
+/* =============================================
+   RESPONSIVE: XS MOBILE (≤ 360px)
+   ============================================= */
+@media (max-width: 360px) {
+  .hero-h1 { font-size: 40px; }
+  .s-title { font-size: 32px; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .g-item { aspect-ratio: 4/5; }
+  .nav-logo { font-size: 18px; }
+}
+
+/* =============================================
+   SAFE AREA (iPhone notch, etc.)
+   ============================================= */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .wa-btn { bottom: calc(clamp(20px, 4vw, 32px) + env(safe-area-inset-bottom)); }
+  .footer { padding-bottom: calc(clamp(20px, 4vw, 32px) + env(safe-area-inset-bottom)); }
+}
+
+/* Touch-friendly tap targets */
+@media (hover: none) {
+  .g-overlay { opacity: 1; background: linear-gradient(0deg, rgba(2,13,31,0.85) 0%, transparent 60%); }
+  .g-tag, .g-title, .g-action { transform: none !important; opacity: 1; }
+  .ev-line { height: 100%; opacity: 0.5; }
+  .svc-card::after { width: 40%; }
+  .why-item::before { height: 100%; opacity: 0.5; }
+}
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- PARTICLES -->
+<div class="particles" id="particles"></div>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="nav" id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="assets/logo.png" alt="Hydraa Drop" onerror="this.style.display='none'">
+    HYDRAA DROP
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#">Home</a>
+    <a href="#services">Services</a>
+    <a href="#events">Events</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#offer">Offer</a>
+    <a href="#contact" class="nav-cta">Order Now</a>
+  </div>
+  <button class="nav-menu" id="navMenuBtn" aria-label="Open menu"><i class="fa fa-bars"></i></button>
+</nav>
+
+<!-- Mobile Nav Overlay -->
+<div class="nav-mobile" id="navMobile">
+  <button class="nav-mobile-close" id="navMobileClose" aria-label="Close menu"><i class="fa fa-times"></i></button>
+  <a href="#" onclick="closeNav()">Home</a>
+  <a href="#services" onclick="closeNav()">Services</a>
+  <a href="#events" onclick="closeNav()">Events</a>
+  <a href="#gallery" onclick="closeNav()">Gallery</a>
+  <a href="#offer" onclick="closeNav()">Offer</a>
+  <a href="#contact" class="cta" onclick="closeNav()">Order Now</a>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow"><span></span> Premium Packaged Water</div>
+      <h1 class="hero-h1">PURE<br>WATER.<br><em>PREMIUM</em></h1>
+      <p class="hero-p">Hydraa Drop delivers purity, trust &amp; freshness in every drop — from bulk supply to luxury customized bottles for your events.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary"><span>Order Now</span><i class="fa fa-arrow-right"></i></a>
+        <a href="#services" class="btn-ghost"><i class="fa fa-play-circle"></i>Our Services</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="orbit"></div>
+      <div class="orbit orbit-2"></div>
+      <div class="bottle-scene">
+        <svg class="bottle-svg" viewBox="0 0 200 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00d4ff" stop-opacity="0.9"/><stop offset="100%" stop-color="#0077ff" stop-opacity="0.7"/></linearGradient>
+            <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="white" stop-opacity="0.25"/><stop offset="50%" stop-color="white" stop-opacity="0.05"/><stop offset="100%" stop-color="white" stop-opacity="0"/></linearGradient>
+            <linearGradient id="bg3" x1="1" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00d4ff" stop-opacity="0.15"/><stop offset="100%" stop-color="#041530" stop-opacity="0.9"/></linearGradient>
+            <filter id="glow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <clipPath id="bodyClip"><path d="M60 90 Q55 100 50 120 L40 380 Q40 400 100 400 Q160 400 160 380 L150 120 Q145 100 140 90 Z"/></clipPath>
+          </defs>
+          <rect x="75" y="30" width="50" height="16" rx="5" fill="url(#bg1)" filter="url(#glow)"/>
+          <rect x="78" y="38" width="44" height="8" rx="2" fill="rgba(0,212,255,0.4)"/>
+          <path d="M78 46 Q76 60 72 80 L128 80 Q124 60 122 46 Z" fill="url(#bg1)"/>
+          <path d="M60 80 Q55 90 50 110 L150 110 Q145 90 140 80 Z" fill="url(#bg1)" opacity="0.85"/>
+          <path d="M50 110 L40 380 Q40 400 100 400 Q160 400 160 380 L150 110 Z" fill="url(#bg3)"/>
+          <rect x="40" y="210" width="120" height="190" rx="0" fill="url(#bg1)" opacity="0.4" clip-path="url(#bodyClip)"/>
+          <path d="M40 210 Q70 200 100 210 Q130 220 160 210 L160 230 Q130 240 100 230 Q70 220 40 230 Z" fill="url(#bg1)" opacity="0.6"/>
+          <path d="M58 115 Q56 150 55 200 L68 200 Q68 150 70 115 Z" fill="url(#bg2)" rx="4"/>
+          <path d="M50 160 L150 160" stroke="rgba(0,212,255,0.15)" stroke-width="0.5"/>
+          <path d="M45 240 L155 240" stroke="rgba(0,212,255,0.1)" stroke-width="0.5"/>
+          <path d="M42 320 L158 320" stroke="rgba(0,212,255,0.08)" stroke-width="0.5"/>
+          <rect x="48" y="165" width="104" height="70" rx="3" fill="rgba(4,21,48,0.6)" stroke="rgba(0,212,255,0.2)" stroke-width="0.5"/>
+          <text x="100" y="192" text-anchor="middle" fill="rgba(0,212,255,0.9)" font-family="Bebas Neue, sans-serif" font-size="14" letter-spacing="2">HYDRAA DROP</text>
+          <text x="100" y="210" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-family="Outfit, sans-serif" font-size="8" letter-spacing="3">PURE DRINKING WATER</text>
+          <line x1="60" y1="220" x2="140" y2="220" stroke="rgba(0,212,255,0.3)" stroke-width="0.5"/>
+          <text x="100" y="230" text-anchor="middle" fill="rgba(255,255,255,0.3)" font-family="Outfit, sans-serif" font-size="7" letter-spacing="2">1 LITRE — ISI CERTIFIED</text>
+          <path d="M40 380 Q40 400 100 400 Q160 400 160 380 L158 382 Q158 398 100 398 Q42 398 42 382 Z" fill="rgba(0,212,255,0.2)"/>
+          <circle cx="70" cy="280" r="3" fill="rgba(0,212,255,0.5)" opacity="0.5"/>
+          <circle cx="115" cy="310" r="2" fill="rgba(0,212,255,0.4)" opacity="0.4"/>
+          <circle cx="88" cy="350" r="2.5" fill="rgba(0,212,255,0.4)" opacity="0.3"/>
+          <circle cx="130" cy="270" r="1.5" fill="rgba(0,212,255,0.6)" opacity="0.5"/>
+        </svg>
+        <div class="bottle-ring"></div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-badge"><div class="stat-num">500+</div><div class="stat-label">Happy Clients</div></div>
+        <div class="stat-badge"><div class="stat-num">99.9%</div><div class="stat-label">Purity Level</div></div>
+        <div class="stat-badge"><div class="stat-num">24hr</div><div class="stat-label">Delivery</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>SCROLL DOWN</div>
+</section>
+
+<!-- ===================== MARQUEE ===================== -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item"><i class="fa fa-droplet"></i> BULK WATER SUPPLY</span>
+    <span class="marquee-item"><i class="fa fa-droplet"></i> CUSTOM BOTTLE LABELS</span>
+    <span class="marquee-item"><i class="fa fa-droplet"></i> WEDDING PACKAGES</span>
+    <span class="marquee-item"><i class="fa fa-droplet"></i> CORPORATE EVENTS</span>
+    <span class="marquee-item"><i class="fa fa-droplet"></i> RETAIL DISTRIBUTION</span>
+    <span class="marquee-item"><i class="fa fa-droplet"></i> ISI CERTIFIED</span>
+    <span class="marquee-item"><i class="fa fa-droplet"></i> BULK WATER SUPPLY</span>
+    <span class="marquee-item"><i class="fa fa-droplet"></i> CUSTOM BOTTLE LABELS</span>
+    <span class="marquee-item"><i class="fa fa-droplet"></i> WEDDING PACKAGES</span>
+    <span class="marquee-item"><i class="fa fa-droplet"></i> CORPORATE EVENTS</span>
+    <span class="marquee-item"><i class="fa fa-droplet"></i> RETAIL DISTRIBUTION</span>
+    <span class="marquee-item"><i class="fa fa-droplet"></i> ISI CERTIFIED</span>
+  </div>
+</div>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="reveal">
+      <div class="s-label">What We Offer</div>
+      <h2 class="s-title">PREMIUM <em>SERVICES</em></h2>
+      <p class="s-sub">Delivering purity, reliability and premium experience for every need.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="svc-card">
+        <div class="svc-num">01</div>
+        <div class="svc-icon">💧</div>
+        <h3 class="svc-title">Bulk Water Supply</h3>
+        <p class="svc-desc">High-quality packaged drinking water for offices, industries, events and retail businesses at scale.</p>
+        <ul class="svc-features">
+          <li>On-time delivery guaranteed</li>
+          <li>Flexible bulk ordering</li>
+          <li>Consistent quality standards</li>
+          <li>Industrial &amp; commercial scale</li>
+        </ul>
+        <button class="svc-btn" onclick="sendWA('Bulk Water Supply')">Get Supply <i class="fa fa-arrow-right"></i></button>
+      </div>
+      <div class="svc-card featured">
+        <div class="badge-featured">Most Popular</div>
+        <div class="svc-num">02</div>
+        <div class="svc-icon">🎉</div>
+        <h3 class="svc-title">Customized Bottles</h3>
+        <p class="svc-desc">Premium branded bottles for weddings, hotels, restaurants, and corporate events with your own label.</p>
+        <ul class="svc-features">
+          <li>Custom label design included</li>
+          <li>Event branding solutions</li>
+          <li>Premium packaging</li>
+          <li>Minimum 200 bottles</li>
+        </ul>
+        <button class="svc-btn" onclick="sendWA('Customized Bottles')">Customize Now <i class="fa fa-arrow-right"></i></button>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">03</div>
+        <div class="svc-icon">🏪</div>
+        <h3 class="svc-title">Retail Distribution</h3>
+        <p class="svc-desc">Reliable supply chain ensuring consistent product availability across local retail stores and outlets.</p>
+        <ul class="svc-features">
+          <li>Fast &amp; regular delivery</li>
+          <li>Retail partnership program</li>
+          <li>Consistent stock levels</li>
+          <li>Competitive margins</li>
+        </ul>
+        <button class="svc-btn" onclick="sendWA('Retail Distribution')">Partner With Us <i class="fa fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY US ===================== -->
+<section class="why-section">
+  <div class="container">
+    <div class="why-layout">
+      <div class="why-left">
+        <div class="reveal">
+          <div class="s-label">Why Choose Us</div>
+          <h2 class="s-title">WE DELIVER <em>TRUST</em></h2>
+          <p class="s-sub">Not just water. We deliver a promise of quality, reliability, and service excellence.</p>
+        </div>
+        <div class="why-list reveal">
+          <div class="why-item active">
+            <div class="why-icon">💎</div>
+            <div class="why-text"><h4>Premium Quality</h4><p>Advanced multi-stage filtration ensuring 99.9% purity in every bottle.</p></div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">⚡</div>
+            <div class="why-text"><h4>Reliable Supply Chain</h4><p>Consistent, on-time delivery for businesses and retail partners.</p></div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">🎯</div>
+            <div class="why-text"><h4>Custom Branding</h4><p>Personalized label design for events, weddings and corporate identity.</p></div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon">🌍</div>
+            <div class="why-text"><h4>Trusted Network</h4><p>Growing presence with 500+ satisfied clients across the region.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="why-right reveal">
+        <div class="why-visual">
+          <div class="why-circle">
+            <div class="why-center">
+              <div class="big-num">500+</div>
+              <p>Happy Clients</p>
+            </div>
+          </div>
+          <div class="float-badge fb1"><strong>99.9%</strong>Purity Level</div>
+          <div class="float-badge fb2"><strong>24hr</strong>Delivery</div>
+          <div class="float-badge fb3"><strong>ISI</strong>Certified</div>
+          <div class="float-badge fb4"><strong>3+</strong>Yrs Experience</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EVENTS ===================== -->
+<section class="events-section" id="events">
+  <div class="container">
+    <div class="reveal">
+      <div class="s-label">Perfect For</div>
+      <h2 class="s-title">EVERY <em>OCCASION</em></h2>
+      <p class="s-sub">From grand weddings to corporate events — we elevate your brand.</p>
+    </div>
+    <div class="events-grid reveal">
+      <div class="ev-card">
+        <div class="ev-card-bg"></div><div class="ev-line"></div>
+        <div class="ev-icon">💍</div>
+        <div class="ev-content">
+          <div class="ev-tag">Premium</div>
+          <h3>Weddings &amp; Celebrations</h3>
+          <p>Custom-labeled bottles that make your special day unforgettable.</p>
+        </div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-card-bg" style="background:linear-gradient(135deg,rgba(0,119,255,0.06),transparent)"></div><div class="ev-line"></div>
+        <div class="ev-icon">🏢</div>
+        <div class="ev-content">
+          <div class="ev-tag">Corporate</div>
+          <h3>Corporate Events</h3>
+          <p>Strengthen your brand with custom-labeled water at every meeting.</p>
+        </div>
+      </div>
+      <div class="ev-card tall">
+        <div class="ev-card-bg" style="background:linear-gradient(135deg,rgba(0,255,204,0.05),transparent)"></div><div class="ev-line"></div>
+        <div class="ev-icon">🏨</div>
+        <div class="ev-content">
+          <div class="ev-tag">Hospitality</div>
+          <h3>Hotels &amp; Restaurants</h3>
+          <p>Premium water supply solutions for the hospitality industry with consistent quality and reliable delivery.</p>
+          <br>
+          <a href="#contact" class="btn-ghost" style="margin-top:10px;display:inline-flex">Get Quote <i class="fa fa-arrow-right" style="margin-left:8px"></i></a>
+        </div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-card-bg"></div><div class="ev-line"></div>
+        <div class="ev-icon">🎉</div>
+        <div class="ev-content">
+          <div class="ev-tag">Events</div>
+          <h3>Parties &amp; Gatherings</h3>
+          <p>Bulk supply for any celebration — small to stadium-scale.</p>
+        </div>
+      </div>
+      <div class="ev-card">
+        <div class="ev-card-bg" style="background:linear-gradient(135deg,rgba(0,212,255,0.05),transparent)"></div><div class="ev-line"></div>
+        <div class="ev-icon">🏋️</div>
+        <div class="ev-content">
+          <div class="ev-tag">Fitness</div>
+          <h3>Gyms &amp; Sports</h3>
+          <p>Keep your members hydrated with branded performance water.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OFFER ===================== -->
+<section class="offer-section" id="offer">
+  <div class="offer-inner">
+    <div class="offer-left reveal">
+      <div class="offer-tag">Limited Time Offer</div>
+      <h2>BULK ORDER <span>BONUS</span></h2>
+      <p>Order <strong>1000+ bottles</strong> and unlock an exclusive deal that saves you thousands — plus a FREE premium water dispenser.</p>
+      <div class="offer-pill">
+        <span class="offer-pill-text">Order 1000+ Bottles</span>
+        <span class="offer-pill-badge">FREE Dispenser</span>
+      </div>
+      <br>
+      <a href="https://wa.me/916266339177?text=Hi%20I%20want%201000%20bottle%20offer" target="_blank" class="btn-primary">
+        <span>Claim This Offer</span>
+        <i class="fa fa-gift"></i>
+      </a>
+    </div>
+    <div class="offer-right reveal">
+      <div class="dispenser-wrap">
+        <div class="dispenser-glow"></div>
+        <img src="./assets/waterdispenser.jpg" alt="Water Dispenser"
+          onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'220\' height=\'300\' viewBox=\'0 0 220 300\'><rect width=\'220\' height=\'300\' fill=\'rgba(0,119,255,0.1)\' rx=\'20\'/><text x=\'50%25\' y=\'50%25\' fill=\'rgba(0,212,255,0.5)\' text-anchor=\'middle\' dy=\'0.3em\' font-size=\'48\'>🚰</text></svg>'">
+        <div class="dispenser-badge db1">FREE!</div>
+        <div class="dispenser-badge db2">Worth ₹8000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TESTIMONIALS ===================== -->
+<section class="testi-section">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <div class="s-label" style="justify-content:center">Client Stories</div>
+      <h2 class="s-title">WHAT THEY <em>SAY</em></h2>
+      <p class="s-sub" style="margin:14px auto 0">Trusted by hundreds of happy customers.</p>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Amazing quality water bottles! Used for my wedding reception — every guest complimented the custom labels. Absolutely premium experience!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">R</div>
+          <div><div class="testi-name">Rahul Sharma</div><div class="testi-role">Wedding Client</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Reliable supply for our restaurant. Always on time, never a shortage. The quality is consistently excellent. Our guests love it."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">P</div>
+          <div><div class="testi-name">Priya Patel</div><div class="testi-role">Restaurant Manager</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Best customized bottles for corporate events. Our brand looked incredibly professional. Will definitely order again for every event."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">A</div>
+          <div><div class="testi-name">Arjun Mehta</div><div class="testi-role">Event Planner</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GALLERY ===================== -->
+<section class="gallery-section" id="gallery">
+  <div class="container">
+    <div class="gallery-header reveal">
+      <div class="s-label" style="justify-content:center">Visual Showcase</div>
+      <h2 class="s-title">OUR <em>GALLERY</em></h2>
+      <p class="s-sub" style="margin:14px auto 0">Crafted for every occasion — explore Hydraa Drop in action.</p>
+      <div class="gallery-filters">
+        <button class="g-filter active" data-filter="all">All</button>
+        <button class="g-filter" data-filter="fitness">Fitness</button>
+        <button class="g-filter" data-filter="wedding">Wedding</button>
+        <button class="g-filter" data-filter="wholesale">Wholesale</button>
+        <button class="g-filter" data-filter="retail">Retail</button>
+      </div>
+    </div>
+    <div class="gallery-grid reveal" id="galleryGrid">
+      <div class="g-item" data-cat="fitness" onclick="openLightbox(0)">
+        <div class="g-badge hot">Trending</div>
+        <img src="./assets/photoad5.png" alt="Refresh Recharge Repeat" loading="lazy">
+        <div class="g-overlay">
+          <span class="g-tag">Fitness</span>
+          <div class="g-title">REFRESH.<br>RECHARGE.<br>REPEAT.</div>
+          <div class="g-action">View Full <i class="fa fa-arrow-right"></i></div>
+        </div>
+      </div>
+      <div class="g-item" data-cat="wedding" onclick="openLightbox(1)">
+        <div class="g-badge">Luxury</div>
+        <img src="./assets/photoad6.png" alt="Luxury Wedding Bottle" loading="lazy">
+        <div class="g-overlay">
+          <span class="g-tag">Wedding</span>
+          <div class="g-title">PURE LOVE<br>IN EVERY DROP</div>
+          <div class="g-action">View Full <i class="fa fa-arrow-right"></i></div>
+        </div>
+      </div>
+      <div class="g-item" data-cat="wholesale" onclick="openLightbox(2)">
+        <div class="g-badge hot">₹110/case</div>
+        <img src="./assets/photoad3.png" alt="Wholesale Value" loading="lazy">
+        <div class="g-overlay">
+          <span class="g-tag">Wholesale</span>
+          <div class="g-title">PURE<br>REFRESHMENT</div>
+          <div class="g-action">View Full <i class="fa fa-arrow-right"></i></div>
+        </div>
+      </div>
+      <div class="g-item" data-cat="fitness" onclick="openLightbox(3)">
+        <img src="./assets/photoad1.png" alt="Fuel Your Grind" loading="lazy">
+        <div class="g-overlay">
+          <span class="g-tag">Fitness</span>
+          <div class="g-title">FUEL YOUR<br>GRIND</div>
+          <div class="g-action">View Full <i class="fa fa-arrow-right"></i></div>
+        </div>
+      </div>
+      <div class="g-item" data-cat="wedding" onclick="openLightbox(4)">
+        <div class="g-badge hot">Popular</div>
+        <img src="./assets/photoad2.png" alt="Customize Bottle" loading="lazy">
+        <div class="g-overlay">
+          <span class="g-tag">Custom</span>
+          <div class="g-title">CELEBRATE<br>EVERY MOMENT</div>
+          <div class="g-action">View Full <i class="fa fa-arrow-right"></i></div>
+        </div>
+      </div>
+      <div class="g-item" data-cat="retail" onclick="openLightbox(5)">
+        <img src="./assets/photoad7.png" alt="Stock Up Sell More" loading="lazy">
+        <div class="g-overlay">
+          <span class="g-tag">Retail</span>
+          <div class="g-title">STOCK UP.<br>SELL MORE.</div>
+          <div class="g-action">View Full <i class="fa fa-arrow-right"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxBg(event)">
+  <div class="lb-inner" id="lbInner">
+    <button class="lb-close" onclick="closeLightbox()"><i class="fa fa-times"></i></button>
+    <button class="lb-nav lb-prev" onclick="lbNav(-1)"><i class="fa fa-chevron-left"></i></button>
+    <button class="lb-nav lb-next" onclick="lbNav(1)"><i class="fa fa-chevron-right"></i></button>
+    <img class="lb-img" id="lbImg" src="" alt="">
+    <div class="lb-caption">
+      <div class="lb-counter" id="lbCounter">1 / 6</div>
+      <div class="lb-dots" id="lbDots"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <div class="s-label" style="justify-content:center">Reach Out</div>
+      <h2 class="s-title">GET IN <em>TOUCH</em></h2>
+      <p class="s-sub" style="margin:14px auto 0">We'll connect with you instantly via WhatsApp.</p>
+    </div>
+    <div class="contact-layout">
+      <div class="contact-left reveal">
+        <h3 style="font-family:var(--font-head);font-size:clamp(26px,5vw,32px);margin-bottom:10px">LET'S START<br><em style="color:var(--ca)">YOUR ORDER</em></h3>
+        <p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.8">From bulk orders to custom-branded bottles — tell us what you need and we'll handle the rest.</p>
+        <div class="c-info-list">
+          <div class="c-info-item">
+            <div class="c-icon"><i class="fa fa-phone"></i></div>
+            <div class="c-text"><h5>Phone</h5><p>6266339177 / 7000416590</p></div>
+          </div>
+          <div class="c-info-item">
+            <div class="c-icon"><i class="fa fa-envelope"></i></div>
+            <div class="c-text"><h5>Email</h5><p>hydraadrop@gmail.com</p></div>
+          </div>
+          <div class="c-info-item">
+            <div class="c-icon"><i class="fa fa-location-dot"></i></div>
+            <div class="c-text"><h5>Location</h5><p>Indore, Madhya Pradesh</p></div>
+          </div>
+        </div>
+        <div class="c-social">
+          <a href="https://www.instagram.com/hydraa.drop" target="_blank" class="c-soc-btn"><i class="fab fa-instagram"></i></a>
+          <a href="https://wa.me/916266339177" target="_blank" class="c-soc-btn"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="contact-right reveal">
+        <form class="c-form" onsubmit="handleSubmit(event)">
+          <div class="c-row">
+            <div class="c-field">
+              <label>Your Name</label>
+              <input type="text" id="f-name" placeholder="Rahul Sharma" required autocomplete="name">
+            </div>
+            <div class="c-field">
+              <label>Phone Number</label>
+              <input type="tel" id="f-phone" placeholder="+91 98765 43210" required autocomplete="tel">
+            </div>
+          </div>
+          <div class="c-field">
+            <label>Email Address</label>
+            <input type="email" id="f-email" placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="c-field">
+            <label>Select Service</label>
+            <select id="f-service" required>
+              <option value="" disabled selected>Choose a service...</option>
+              <option>Bulk Water Supply</option>
+              <option>Customized Bottles</option>
+              <option>Retail Distribution</option>
+              <option>Event Package</option>
+            </select>
+          </div>
+          <div class="c-field">
+            <label>Your Requirement</label>
+            <textarea id="f-msg" placeholder="Tell us about your order — quantity, occasion, timeline..."></textarea>
+          </div>
+          <button type="submit" class="c-submit" id="c-submit">
+            <span>Send via WhatsApp</span>
+            <i class="fab fa-whatsapp"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-logo">
+        <img src="./assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+        HYDRAA DROP
+      </div>
+      <p class="footer-desc">Premium packaged drinking water delivering purity, quality and trust for every occasion — from bulk supply to luxury custom-branded bottles.</p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/hydraa.drop" target="_blank" class="footer-soc"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/916266339177" target="_blank" class="footer-soc"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-h">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#offer">Offer</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-h">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Bulk Water Supply</a></li>
+        <li><a href="#services">Customized Bottles</a></li>
+        <li><a href="#services">Retail Distribution</a></li>
+        <li><a href="#events">Wedding Packages</a></li>
+        <li><a href="#events">Corporate Events</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-h">Contact</div>
+      <ul class="footer-contacts">
+        <li><i class="fa fa-phone"></i> 6266339177</li>
+        <li><i class="fa fa-phone"></i> 7000416590</li>
+        <li><i class="fa fa-envelope"></i> hydraadrop@gmail.com</li>
+        <li><i class="fa fa-location-dot"></i> Indore, MP</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 <span>Hydraa Drop</span>. All rights reserved.</p>
+    <p>Crafted with 💧 for purity &amp; excellence</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/916266339177?text=Hi%20Hydraa%20Drop%2C%20I%20want%20to%20order%20water" target="_blank" class="wa-btn">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+/* ============ CUSTOM CURSOR ============ */
+const isMobile = window.matchMedia('(hover: none)').matches;
+if (!isMobile) {
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx=e.clientX; my=e.clientY;
+    dot.style.left=mx+'px'; dot.style.top=my+'px';
+  });
+  (function animRing(){ rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
+}
+
+/* ============ PARTICLES ============ */
+const pc = document.getElementById('particles');
+const count = isMobile ? 20 : 40;
+for(let i=0;i<count;i++){
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = Math.random()*4+2;
+  p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;animation-duration:${Math.random()*15+8}s;animation-delay:${Math.random()*10}s;`;
+  pc.appendChild(p);
+}
+
+/* ============ NAVBAR SCROLL ============ */
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+  revealElements();
+}, {passive:true});
+
+/* ============ MOBILE NAV ============ */
+function openNav() {
+  document.getElementById('navMobile').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('navMenuBtn').innerHTML = '<i class="fa fa-times"></i>';
+}
+function closeNav() {
+  document.getElementById('navMobile').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('navMenuBtn').innerHTML = '<i class="fa fa-bars"></i>';
+}
+document.getElementById('navMenuBtn').addEventListener('click', () => {
+  document.getElementById('navMobile').classList.contains('open') ? closeNav() : openNav();
+});
+document.getElementById('navMobileClose').addEventListener('click', closeNav);
+// Close on outside tap
+document.getElementById('navMobile').addEventListener('click', e => {
+  if (e.target === document.getElementById('navMobile')) closeNav();
+});
+
+/* ============ SCROLL REVEAL ============ */
+function revealElements(){
+  document.querySelectorAll('.reveal:not(.vis)').forEach((el,i)=>{
+    const rect = el.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 60){ setTimeout(()=> el.classList.add('vis'), i*80); }
+  });
+}
+window.addEventListener('load', revealElements);
+document.addEventListener('scroll', revealElements, {passive:true});
+
+/* ============ WHY ITEMS ============ */
+document.querySelectorAll('.why-item').forEach(item=>{
+  item.addEventListener('mouseenter',()=>{
+    document.querySelectorAll('.why-item').forEach(i=>i.classList.remove('active'));
+    item.classList.add('active');
+  });
+  // Touch support
+  item.addEventListener('touchstart',()=>{
+    document.querySelectorAll('.why-item').forEach(i=>i.classList.remove('active'));
+    item.classList.add('active');
+  },{passive:true});
+});
+
+/* ============ WHATSAPP ============ */
+function sendWA(service){
+  const msg = `Hi Hydraa Drop,\n\nI am interested in ${service}.\nPlease share details.\n\nThank you.`;
+  window.open('https://wa.me/916266339177?text='+encodeURIComponent(msg),'_blank');
+}
+
+function handleSubmit(e){
+  e.preventDefault();
+  const name = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const service = document.getElementById('f-service').value;
+  const msg = document.getElementById('f-msg').value.trim();
+  if(!name||!phone||!service){ alert('Please fill all required fields'); return; }
+  const text = `Hi Hydraa Drop,\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email||'N/A'}\nService: ${service}\nRequirement: ${msg||'No message'}\n\nThank you.`;
+  window.open('https://wa.me/916266339177?text='+encodeURIComponent(text),'_blank');
+  const btn = document.getElementById('c-submit');
+  btn.classList.add('sent');
+  btn.innerHTML = '<span>Sent!</span> <i class="fa fa-check"></i>';
+  setTimeout(()=>{ btn.classList.remove('sent'); btn.innerHTML = '<span>Send via WhatsApp</span> <i class="fab fa-whatsapp"></i>'; }, 4000);
+}
+
+/* ============ GALLERY FILTER ============ */
+const galleryImages = [
+  'assets/photoad5.png',
+  'assets/photoad6.png',
+  'assets/photoad3.png',
+  'assets/photoad1.png',
+  'assets/photoad2.png',
+  'assets/photoad7.png',
+];
+
+document.querySelectorAll('.g-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.g-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    const items = document.querySelectorAll('#galleryGrid .g-item');
+    items.forEach(item => {
+      const show = filter === 'all' || item.dataset.cat === filter;
+      item.style.transition = 'opacity 0.35s, transform 0.35s';
+      if(show){
+        item.style.display = '';
+        item.style.opacity = '0';
+        item.style.transform = 'scale(0.95)';
+        requestAnimationFrame(()=>{ item.style.opacity='1'; item.style.transform='scale(1)'; });
+      } else {
+        item.style.opacity = '0';
+        item.style.transform = 'scale(0.95)';
+        setTimeout(()=>{ item.style.display='none'; },350);
+      }
+    });
+  });
+});
+
+/* ============ LIGHTBOX ============ */
+let lbCurrent = 0;
+
+function buildDots() {
+  const dots = document.getElementById('lbDots');
+  dots.innerHTML = '';
+  galleryImages.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'lb-dot' + (i === lbCurrent ? ' active' : '');
+    d.setAttribute('aria-label', `Go to image ${i+1}`);
+    d.onclick = (e) => { e.stopPropagation(); setLb(i); };
+    dots.appendChild(d);
+  });
+}
+
+function setLb(idx) {
+  lbCurrent = (idx + galleryImages.length) % galleryImages.length;
+  const img = document.getElementById('lbImg');
+  img.style.opacity = '0';
+  img.style.transform = 'scale(0.97)';
+  img.style.transition = 'opacity 0.2s, transform 0.2s';
+  setTimeout(() => {
+    img.src = galleryImages[lbCurrent];
+    img.style.opacity = '1';
+    img.style.transform = 'scale(1)';
+  }, 150);
+  document.getElementById('lbCounter').textContent = (lbCurrent + 1) + ' / ' + galleryImages.length;
+  buildDots();
+}
+
+function openLightbox(idx) {
+  setLb(idx);
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeLightboxBg(e) {
+  if(e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+function lbNav(dir) { setLb(lbCurrent + dir); }
+
+document.addEventListener('keydown', e => {
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
+  if(e.key === 'ArrowRight') lbNav(1);
+  if(e.key === 'ArrowLeft') lbNav(-1);
+  if(e.key === 'Escape') closeLightbox();
+});
+
+/* Touch swipe for lightbox */
+let lbTouchX = null;
+document.getElementById('lightbox').addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; },{passive:true});
+document.getElementById('lightbox').addEventListener('touchend', e => {
+  if(lbTouchX === null) return;
+  const dx = e.changedTouches[0].clientX - lbTouchX;
+  if(Math.abs(dx) > 40) lbNav(dx < 0 ? 1 : -1);
+  lbTouchX = null;
+},{passive:true});
+
+buildDots();
+</script>
+</body>
+</html>
